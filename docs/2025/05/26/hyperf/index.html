@@ -1,0 +1,857 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1" theme-name="Stellar" theme-version="1.29.1">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  
+  <title>Hyperf - (゜-゜)つロ 干杯 d===(￣▽￣*)b</title>
+
+  
+    <meta name="description" content="perf本机项目目录：D:&#x2F;Docker&#x2F;Hyperf数据库名：test表名：test01  表的数据结构：  安装可以通过docker快速的运行开发Hyperf项目  启动容器  hyperf&#x2F;hyperf-skeleton 12docker run --name hyperf -v D:&#x2F;Docker&#x2F;Hyperf:&#x2F;data&#x2F;project -w &#x2F;data&#x2F;proje">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hyperf">
+<meta property="og:url" content="http://example.com/2025/05/26/hyperf/index.html">
+<meta property="og:site_name" content="(゜-゜)つロ 干杯 d&#x3D;&#x3D;&#x3D;(￣▽￣*)b">
+<meta property="og:description" content="perf本机项目目录：D:&#x2F;Docker&#x2F;Hyperf数据库名：test表名：test01  表的数据结构：  安装可以通过docker快速的运行开发Hyperf项目  启动容器  hyperf&#x2F;hyperf-skeleton 12docker run --name hyperf -v D:&#x2F;Docker&#x2F;Hyperf:&#x2F;data&#x2F;project -w &#x2F;data&#x2F;proje">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.hdslb.com/bfs/openplatform/dfc36ee48af69e85a0ed87173c7c665db4ede5a7.png">
+<meta property="og:image" content="https://i0.hdslb.com/bfs/openplatform/8f8e69aa9ff09190a298639b1433d6629e2ceb60.png">
+<meta property="article:published_time" content="2025-05-26T05:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-09T01:20:56.230Z">
+<meta property="article:author" content="ShanMoYu">
+<meta property="article:tag" content="php">
+<meta property="article:tag" content="hyperf">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i0.hdslb.com/bfs/openplatform/dfc36ee48af69e85a0ed87173c7c665db4ede5a7.png">
+  
+  
+  
+  <meta name="keywords" content="php,hyperf">
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.29.1">
+
+  
+    <link rel="shortcut icon" href="/images/clash.svg">
+  
+
+  
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.6.0/lxgwwenkaiscreen.css"><link rel="stylesheet" href="/my.css"><script src="/my.js"></script>
+</head>
+<body>
+
+<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/头像.webp" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">ShanMoYu</div><div class="sub normal cap">不知道写什么就先占着</div><div class="sub hover cap" style="opacity:0"> Designed by SMY</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<nav class="menu dis-select"><a class="nav-item active" title="博客" href="/" style="color:#1BCDFC"><span>博客</span></a><a class="nav-item" title="文档" href="/wiki/" style="color:#3DC550"><span>文档</span></a><a class="nav-item" title="社交" href="/friends/" style="color:#F44336"><span>社交</span></a></nav>
+</div>
+<div class="widgets">
+
+
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/2025/05/26/hyperf/"><span class="title">Hyperf</span></a><a class="item title" href="/2025/05/26/hyperf%20%E5%B0%8F%E7%AC%94%E8%AE%B0/"><span class="title">Hyperf 小笔记</span></a><a class="item title" href="/2025/06/04/kratos%20%E5%AD%A6%E4%B9%A0/"><span class="title">kratos 学习</span></a><a class="item title" href="/2025/06/04/kratos%20%E5%B0%8F%E7%AC%94%E8%AE%B0/"><span class="title">kratos 小笔记</span></a><a class="item title" href="/2025/05/26/Hyperf%20%E5%BF%AB%E9%80%9F%E5%AD%A6%E4%B9%A0/"><span class="title">Hyperf 快速学习</span></a><a class="item title" href="/2025/05/29/Hyperf%20%E5%85%B6%E4%BB%96%E7%BB%84%E4%BB%B6/"><span class="title">Hyperf 其他组件</span></a><a class="item title" href="/2025/05/29/Hyperf%20%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/"><span class="title">Hyperf 日志服务前置学习</span></a><a class="item title" href="/2025/06/04/kratos%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87%E5%92%8C%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/"><span class="title">kratos环境准备和工具安装</span></a><a class="item title" href="/2025/05/22/hello-world/"><span class="title">Hello World</span></a></div></widget>
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" title="Github" href="/" rel="noopener noreferrer"><svg t="1749544483694" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3318" width="200" height="200"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9 23.5 23.2 38.1 55.4 38.1 91v112.5c0.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z" p-id="3319"></path></svg></a><a class="social" title="Steam" href="/" rel="noopener noreferrer"><svg t="1749544605406" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4332" width="200" height="200"><path d="M904 332.571429q0 57.714286-40.857143 98.571429t-98.571429 40.857143-98.571429-40.857143-40.857143-98.571429 40.857143-98.571429 98.571429-40.857143 98.571429 40.857143 40.857143 98.571429zm-440 424q0-59.428571-41.714286-101.142857t-101.142857-41.714286q-15.428571 0-30.857143 3.428571l59.428571 24q44 17.714286 62.571429 60.857143t0.857143 86.571429q-17.714286 44-61.142857 62.285714t-86.857143 0.571429q-12-4.571429-35.428571-14t-34.857143-14q18.285714 34.285714 52 55.142857t74.285714 20.857143q59.428571 0 101.142857-41.714286t41.714286-101.142857zm474.285714-423.428571q0-72-51.142857-123.142857t-123.142857-51.142857q-72.571429 0-123.714286 51.142857t-51.142857 123.142857q0 72.571429 51.142857 123.428571t123.714286 50.857143q72 0 123.142857-50.857143t51.142857-123.428571zm85.714286 0q0 108-76.285714 184t-183.714286 76l-249.714286 182.285714q-6.857143 73.714286-62.285714 124.571429t-130.857143 50.857143q-69.142857 0-122.285714-43.428571t-67.428571-109.714286l-131.428571-52.571429 0-245.142857 222.285714 89.714286q45.142857-27.428571 98.857143-27.428571 7.428571 0 20 1.142857l162.285714-232.571429q1.142857-106.857143 77.428571-182.285714t183.142857-75.428571q107.428571 0 183.714286 76.285714t76.285714 183.714286z" p-id="4333"></path></svg></a><a class="social" title="bilibili" href="/" rel="noopener noreferrer"><svg t="1749544944631" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="11834" width="200" height="200"><path d="M777.514667 131.669333a53.333333 53.333333 0 0 1 0 75.434667L728.746667 255.829333h49.92A160 160 0 0 1 938.666667 415.872v320a160 160 0 0 1-160 160H245.333333A160 160 0 0 1 85.333333 735.872v-320a160 160 0 0 1 160-160h49.749334L246.4 207.146667a53.333333 53.333333 0 0 1 75.392-75.434667l113.152 113.152c3.370667 3.370667 6.186667 7.04 8.448 10.965333h137.088c2.261333-3.925333 5.12-7.68 8.490667-11.008l113.109333-113.152a53.333333 53.333333 0 0 1 75.434667 0z m1.152 231.253334H245.333333a53.333333 53.333333 0 0 0-53.205333 49.365333l-0.128 4.010667v320c0 28.117333 21.76 51.114667 49.365333 53.162666l3.968 0.170667h533.333334a53.333333 53.333333 0 0 0 53.205333-49.365333l0.128-3.968v-320c0-29.44-23.893333-53.333333-53.333333-53.333334z m-426.666667 106.666666c29.44 0 53.333333 23.893333 53.333333 53.333334v53.333333a53.333333 53.333333 0 1 1-106.666666 0v-53.333333c0-29.44 23.893333-53.333333 53.333333-53.333334z m320 0c29.44 0 53.333333 23.893333 53.333333 53.333334v53.333333a53.333333 53.333333 0 1 1-106.666666 0v-53.333333c0-29.44 23.893333-53.333333 53.333333-53.333334z" p-id="11835" ></path></svg></a><a class="social" title="Tag" href="/tags" rel="noopener noreferrer"><svg t="1749545003744" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="12936" width="200" height="200"><path d="M788.48 629.418667c0-17.066667-5.802667-31.744-17.749333-44.714667L421.205333 235.861333c-12.288-12.288-29.354667-22.869333-49.834667-31.744-21.162667-8.874667-39.936-12.970667-57.002667-12.970667L110.933333 191.146667c-17.066667 0-31.744 6.485333-44.032 18.773333-12.288 12.288-18.773333 26.965333-18.773333 44.032l0 202.752c0 17.066667 4.096 36.522667 12.970667 57.002667 8.874667 21.162667 18.773333 37.546667 31.744 49.834667l349.525333 349.525333c12.288 12.288 26.965333 17.749333 44.032 17.749333 17.066667 0 31.744-5.802667 44.714667-17.749333l239.616-239.616C781.994667 661.162667 788.48 646.485333 788.48 629.418667L788.48 629.418667 788.48 629.418667zM248.490667 392.192c-12.288 12.288-26.965333 18.090667-44.032 18.090667-17.066667 0-31.744-5.802667-44.032-18.090667-12.288-12.288-18.090667-26.965333-18.090667-44.032 0-17.066667 5.802667-31.744 18.090667-44.032 12.288-12.288 26.965333-18.090667 44.032-18.090667 17.066667 0 31.744 5.802667 44.032 18.090667C260.778667 316.416 266.24 331.093333 266.24 348.16 267.264 365.568 260.778667 379.904 248.490667 392.192L248.490667 392.192 248.490667 392.192zM958.122667 584.362667 608.597333 235.861333c-12.288-12.288-29.354667-22.869333-49.834667-31.744C537.6 195.242667 518.826667 191.146667 501.76 191.146667l-109.909333 0c17.066667 0 36.522667 4.096 57.002667 12.970667 21.162667 8.874667 37.546667 18.773333 49.834667 31.744l349.525333 348.501333c12.288 12.970667 18.090667 27.648 18.090667 44.714667s-5.802667 31.744-18.090667 44.032l-229.034667 229.717333c9.898667 9.898667 18.773333 17.066667 25.941333 21.845333 7.168 4.778667 17.066667 6.485333 28.672 6.485333 17.066667 0 31.744-5.802667 44.714667-18.090667l239.616-240.298667c12.288-12.288 17.749333-26.965333 17.749333-44.032S970.069333 597.674667 958.122667 584.362667L958.122667 584.362667 958.122667 584.362667zM958.122667 584.362667"  p-id="12937"></path></svg></a><a class="social" title="文档" href="/wiki" rel="noopener noreferrer"><svg t="1749545127371" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="14215" width="200" height="200"><path d="M128 256h96c19.2 0 32-12.8 32-32s-12.8-32-32-32h-96v-64c0-38.4 25.6-64 64-64h96c38.4 0 64 25.6 64 64v768c0 38.4-25.6 64-64 64h-96c-38.4 0-64-25.6-64-64V256z" fill="#707070" p-id="14216"></path><path d="M704 320h96c19.2 0 32-12.8 32-32s-12.8-32-32-32h-96V128c0-38.4 25.6-64 64-64h64c38.4 0 64 25.6 64 64v768c0 38.4-25.6 64-64 64h-64c-38.4 0-64-25.6-64-64V320z" fill="#707070" p-id="14217"></path><path d="M416 448h96c19.2 0 32-12.8 32-32s-12.8-32-32-32h-96V128c0-38.4 25.6-64 64-64h96c38.4 0 64 25.6 64 64v768c0 38.4-25.6 64-64 64h-96c-38.4 0-64-25.6-64-64V448z"  p-id="14218"></path></svg></a></div></footer>
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top"><img class="bg lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i0.hdslb.com/bfs/openplatform/bd94766e9017f28374eb60f130be6d423b889111.png">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/php/">php</a> <span class="sep"></span> <a class="cap breadcrumb-link" href="/categories/php/hyperf/">hyperf</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2025-05-26T05:00:00.000Z">2025-05-26</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2025-06-09T01:20:56.230Z">2025-06-09</time></span></div><div class="flex-row"><span style="padding: 4px;">本文：3.4k字</span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>Hyperf</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><blockquote>
+<p>perf本机项目目录：D:&#x2F;Docker&#x2F;Hyperf<br>数据库名：test<br>表名：test01</p>
+</blockquote>
+<p>表的数据结构：</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i0.hdslb.com/bfs/openplatform/dfc36ee48af69e85a0ed87173c7c665db4ede5a7.png"></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>可以通过docker快速的运行开发Hyperf项目</p>
+<ul>
+<li>启动容器</li>
+</ul>
+<figure class="highlight sh"><figcaption><span>hyperf/hyperf-skeleton <项目名></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --name hyperf -v D:/Docker/Hyperf:/data/project -w /data/project -p 9501:9501 -it --privileged -u root --entrypoint /bin/sh hyperf/hyperf:8.1-alpine-v3.18-swoole</span><br><span class="line"><span class="comment">## 不同版本可以在docker镜像库中查看</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建项目</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer create-project hyperf/hyperf-skeleton &lt;项目名&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>启动项目</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> &lt;项目名&gt;</span><br><span class="line">php bin/hyperf.php start</span><br></pre></td></tr></table></figure>
+
+<p>接下来，就可以在宿主机 <code>D:/Docker/Hyperf/&lt;项目名&gt;</code> 中看到好的代码。 由于 Hyperf 是持久化的 CLI 框架，修改代码后，通过 <code>CTRL + C</code> 终止当前启动的进程实例，并重新执行 <code>php bin/hyperf.php start</code> 启动命令即可（或者重启docker容器）。</p>
+<p><code>docker stop hyperf</code>   停止容器<br><code>docker start hyperf</code>   启动容器</p>
+<p><code>docker exec -it hyperf /bin/bash</code>  进入容器<br><code>cd Test</code><br><code>php bin/hyperf.php start</code>   启动服务</p>
+<br/>
+
+<br/>
+
+<br/>
+
+<h2 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h2><h3 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer require hyperf/db-connection</span><br></pre></td></tr></table></figure>
+
+<p>启动容器时安装了就不用再装</p>
+<p>修改.env配置文件</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">APP_NAME=skeleton</span></span><br><span class="line"><span class="string">APP_ENV=dev</span></span><br><span class="line"></span><br><span class="line"><span class="string">DB_DRIVER=mysql</span></span><br><span class="line"><span class="string">DB_HOST=host.docker.internal</span>    <span class="comment">## host.docker.internal 解释成主机（宿主机）</span></span><br><span class="line"><span class="string">DB_PORT=3306</span></span><br><span class="line"><span class="string">DB_DATABASE=test</span></span><br><span class="line"><span class="string">DB_USERNAME=root</span></span><br><span class="line"><span class="string">DB_PASSWORD=2025_2.</span></span><br><span class="line"><span class="string">DB_CHARSET=utf8mb4</span></span><br><span class="line"><span class="string">DB_COLLATION=utf8mb4_unicode_ci</span></span><br><span class="line"><span class="string">DB_PREFIX=</span>   <span class="comment">## 需要除去表名的前缀</span></span><br><span class="line"></span><br><span class="line"><span class="string">REDIS_HOST=host.docker.internal</span></span><br><span class="line"><span class="string">REDIS_AUTH=2025_2.</span></span><br><span class="line"><span class="string">REDIS_PORT=6379</span></span><br><span class="line"><span class="string">REDIS_DB=0</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="多库连接"><a href="#多库连接" class="headerlink" title="多库连接"></a>多库连接</h4><p>如果需要连接多个数据库，新增库需添加新配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 如果需要连接多个数据库</span></span><br><span class="line"><span class="comment">## /*新增库需添加新配置*/</span></span><br><span class="line"></span><br><span class="line"><span class="string">DB_DRIVER_TWO=mysql</span></span><br><span class="line"><span class="string">DB_HOST_TWO=host.docker.internal</span></span><br><span class="line"><span class="string">DB_PORT_TWO=3306</span></span><br><span class="line"><span class="string">DB_DATABASE_TWO=wechat_program</span></span><br><span class="line"><span class="string">DB_USERNAME_TWO=root</span></span><br><span class="line"><span class="string">DB_PASSWORD_TWO=2025_2.</span></span><br><span class="line"><span class="string">DB_CHARSET_TWO=utf8mb4</span></span><br><span class="line"><span class="string">DB_COLLATION_TWO=utf8mb4_unicode_ci</span></span><br><span class="line"><span class="string">DB_PREFIX_TWO=</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在 config&#x2F;autoload&#x2F;database.php 中添加配置</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span>(strict_types=<span class="number">1</span>);</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This file is part of Hyperf.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@link</span>     https://www.hyperf.io</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@document</span> https://hyperf.wiki</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@contact</span>  group<span class="doctag">@hyperf</span>.io</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@license</span>  https://github.com/hyperf/hyperf/blob/master/LICENSE</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">use</span> <span class="keyword">function</span> <span class="title">Hyperf</span>\<span class="title">Support</span>\<span class="title">env</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> [</span><br><span class="line">    <span class="string">&#x27;default&#x27;</span> =&gt; [...........],</span><br><span class="line">    <span class="string">&#x27;db2&#x27;</span> =&gt; [</span><br><span class="line">        <span class="string">&#x27;driver&#x27;</span> =&gt; <span class="title function_ invoke__">env</span>(<span class="string">&#x27;DB_DRIVER_TWO&#x27;</span>, <span class="string">&#x27;mysql&#x27;</span>),</span><br><span class="line">        <span class="string">&#x27;host&#x27;</span> =&gt; <span class="title function_ invoke__">env</span>(<span class="string">&#x27;DB_HOST_TWO&#x27;</span>, <span class="string">&#x27;localhost&#x27;</span>),</span><br><span class="line">        <span class="string">&#x27;database&#x27;</span> =&gt; <span class="title function_ invoke__">env</span>(<span class="string">&#x27;DB_DATABASE_TWO&#x27;</span>, <span class="string">&#x27;hyperf&#x27;</span>),</span><br><span class="line">        <span class="string">&#x27;port&#x27;</span> =&gt; <span class="title function_ invoke__">env</span>(<span class="string">&#x27;DB_PORT_TWO&#x27;</span>, <span class="number">3306</span>),</span><br><span class="line">        <span class="string">&#x27;username&#x27;</span> =&gt; <span class="title function_ invoke__">env</span>(<span class="string">&#x27;DB_USERNAME_TWO&#x27;</span>, <span class="string">&#x27;root&#x27;</span>),</span><br><span class="line">        <span class="string">&#x27;password&#x27;</span> =&gt; <span class="title function_ invoke__">env</span>(<span class="string">&#x27;DB_PASSWORD_TWO&#x27;</span>, <span class="string">&#x27;&#x27;</span>),</span><br><span class="line">        <span class="string">&#x27;charset&#x27;</span> =&gt; <span class="title function_ invoke__">env</span>(<span class="string">&#x27;DB_CHARSET_TWO&#x27;</span>, <span class="string">&#x27;utf8&#x27;</span>),</span><br><span class="line">        <span class="string">&#x27;collation&#x27;</span> =&gt; <span class="title function_ invoke__">env</span>(<span class="string">&#x27;DB_COLLATION_TWO&#x27;</span>, <span class="string">&#x27;utf8_unicode_ci&#x27;</span>),</span><br><span class="line">        <span class="string">&#x27;prefix&#x27;</span> =&gt; <span class="title function_ invoke__">env</span>(<span class="string">&#x27;DB_PREFIX_TWO&#x27;</span>, <span class="string">&#x27;&#x27;</span>),</span><br><span class="line">        <span class="string">&#x27;pool&#x27;</span> =&gt; [</span><br><span class="line">            <span class="string">&#x27;min_connections&#x27;</span> =&gt; <span class="number">1</span>,</span><br><span class="line">            <span class="string">&#x27;max_connections&#x27;</span> =&gt; <span class="number">10</span>,</span><br><span class="line">            <span class="string">&#x27;connect_timeout&#x27;</span> =&gt; <span class="number">10.0</span>,</span><br><span class="line">            <span class="string">&#x27;wait_timeout&#x27;</span> =&gt; <span class="number">3.0</span>,</span><br><span class="line">            <span class="string">&#x27;heartbeat&#x27;</span> =&gt; -<span class="number">1</span>,</span><br><span class="line">            <span class="string">&#x27;max_idle_time&#x27;</span> =&gt; (<span class="keyword">float</span>) <span class="title function_ invoke__">env</span>(<span class="string">&#x27;DB_MAX_IDLE_TIME&#x27;</span>, <span class="number">60</span>),</span><br><span class="line">        ],</span><br><span class="line">        <span class="string">&#x27;commands&#x27;</span> =&gt; [</span><br><span class="line">            <span class="string">&#x27;gen:model&#x27;</span> =&gt; [</span><br><span class="line">                <span class="string">&#x27;path&#x27;</span> =&gt; <span class="string">&#x27;app/Model/db2&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;force_casts&#x27;</span> =&gt; <span class="literal">true</span>,</span><br><span class="line">                <span class="string">&#x27;inheritance&#x27;</span> =&gt; <span class="string">&#x27;Model&#x27;</span>,</span><br><span class="line">            ],</span><br><span class="line">        ],</span><br><span class="line">    ],</span><br><span class="line"></span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h3 id="创建模型"><a href="#创建模型" class="headerlink" title="创建模型"></a>创建模型</h3><p>创建模型</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 生成所有模型，--with-comments 添加注释</span></span><br><span class="line">php bin/hyperf.php gen:model <span class="literal">--with-comments</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 创建指定模型 </span></span><br><span class="line">php bin/hyperf.php gen:model &lt;table_name&gt; <span class="literal">--with-comments</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## --pool 指定数据库 </span></span><br><span class="line">php bin/hyperf.php gen:model &lt;table_name&gt; <span class="literal">--pool</span> db2</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h3 id="时间戳"><a href="#时间戳" class="headerlink" title="时间戳"></a>时间戳</h3><p>默认情况下，Hyperf 预期你的数据表中存在 <code>created_at</code> 和 <code>updated_at</code> 。如果你不想让 Hyperf 自动管理这两个列， 可以将模型中的 <code>$timestamps</code> 属性设置为 false：<br>created_at 和 updated_at 为 创建时间和更新时间</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span>(strict_types=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">Model</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">DbConnection</span>\<span class="title">Model</span>\<span class="title">Model</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test01</span> <span class="keyword">extends</span> <span class="title">Model</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">bool</span> <span class="variable">$timestamps</span> = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<h3 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h3><h4 id="插入模型"><a href="#插入模型" class="headerlink" title="插入模型"></a>插入模型</h4><p>插入：<br>要往数据库新增一条记录，先创建新模型实例，给实例设置属性，然后调用 save 方法：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Model</span>\<span class="title">Test01</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$test01</span> = <span class="keyword">new</span> <span class="title class_">Test01</span>();</span><br><span class="line"><span class="variable">$test01</span>-&gt;conn = <span class="string">&#x27;Hyperf&#x27;</span>;</span><br><span class="line"><span class="variable">$test01</span>-&gt;<span class="title function_ invoke__">save</span>();   </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<div class="tag-plugin colorful note" color="cyan"><div class="body"><p>created_at&nbsp;和&nbsp;updated_at&nbsp;时间戳将会自动设置，不需要手动赋值。</p></div></div>
+
+<br/>
+
+<p>批量插入：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Model</span>\<span class="title">Test01</span>;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Test01</span>::<span class="title function_ invoke__">insert</span>([</span><br><span class="line">  [<span class="string">&#x27;conn&#x27;</span> =&gt; <span class="string">&#x27;hyperf 1&#x27;</span>],</span><br><span class="line">  [<span class="string">&#x27;conn&#x27;</span> =&gt; <span class="string">&#x27;hyperf 2&#x27;</span>],</span><br><span class="line">  [<span class="string">&#x27;conn&#x27;</span> =&gt; <span class="string">&#x27;hyperf 3&#x27;</span>]</span><br><span class="line">]);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h4 id="更新模型"><a href="#更新模型" class="headerlink" title="更新模型"></a>更新模型</h4><p>更新：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Model</span>\<span class="title">Test01</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// find 默认参数为id字段</span></span><br><span class="line"><span class="variable">$test01</span> = <span class="title class_">Test01</span>::<span class="title function_ invoke__">query</span>()-&gt;<span class="title function_ invoke__">find</span>(<span class="number">3</span>);</span><br><span class="line"><span class="variable">$test01</span>-&gt;conn = <span class="string">&#x27;Hi Hyperf 3&#x27;</span>;</span><br><span class="line"><span class="variable">$test01</span>-&gt;<span class="title function_ invoke__">save</span>();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>批量&#x2F;条件查询 更新:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Model</span>\<span class="title">Test01</span>;</span><br><span class="line"></span><br><span class="line"><span class="title class_">User</span>::<span class="title function_ invoke__">query</span>()-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;conn&#x27;</span>, <span class="string">&#x27;Hyperf&#x27;</span>)-&gt;<span class="title function_ invoke__">update</span>([<span class="string">&#x27;conn&#x27;</span> =&gt; <span class="string">&#x27;Hi Hyperf 3&#x27;</span>]);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h4 id="查询模型"><a href="#查询模型" class="headerlink" title="查询模型"></a>查询模型</h4><p>查询：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Model</span>\<span class="title">Test01</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$test01</span> = <span class="title class_">Test01</span>::<span class="title function_ invoke__">query</span>()-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;id&#x27;</span>,<span class="number">4</span>)-&gt;<span class="title function_ invoke__">first</span>()-&gt;<span class="title function_ invoke__">toArray</span>();   <span class="comment">## 查询一条</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<p>批量查询：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Model</span>\<span class="title">Test01</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$test01</span> = <span class="title class_">Test01</span>::<span class="title function_ invoke__">query</span>()-&gt;<span class="title function_ invoke__">where</span>(<span class="string">&#x27;conn&#x27;</span>,<span class="string">&#x27;Hyperf&#x27;</span>)-&gt;<span class="title function_ invoke__">get</span>()-&gt;<span class="title function_ invoke__">toArray</span>();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>当查询不到数据时， first() 会返回null无法转空数组，get() 可以转空数组</strong>，也就是 first()-&gt;toArray(); 会报错</p>
+<br/>
+
+<br/>
+
+<h4 id="分块查询以及注意事项"><a href="#分块查询以及注意事项" class="headerlink" title="分块查询以及注意事项*"></a>分块查询以及注意事项*</h4><p>查询数据时如果数据太大，可以使用 <code>chunk</code> 方法对数据进行分块处理</p>
+<p>查询指定字段时尽量使用 <code>select(&#39;id&#39;)</code> 方法，避免使用 <code>get(&#39;id&#39;)</code>、<code>pluck(&#39;id&#39;)</code>, select 会直接返回id字段的数据，get和pluck 会先查询全部数据再获取单列值的集合，两个占用的内存不一样，使用的 <code>chunk</code> 方法也不一样。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## TmdbMovieCast 表，查询 tmdb_credit_id 字段返回的结果不重复，并分10000条一块一块执行</span></span><br><span class="line"><span class="title class_">TmdbMovieCast</span>::<span class="title function_ invoke__">select</span>(<span class="string">&#x27;tmdb_credit_id&#x27;</span>)-&gt;<span class="title function_ invoke__">distinct</span>()-&gt;<span class="title function_ invoke__">chunk</span>(<span class="number">10000</span>,function (<span class="variable">$list</span>)&#123;</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="variable">$list</span> <span class="keyword">as</span> <span class="variable">$cast</span>) &#123;</span><br><span class="line">        <span class="variable">$data</span> = [</span><br><span class="line">            <span class="string">&#x27;id&#x27;</span> =&gt; <span class="variable">$cast</span>[<span class="string">&#x27;tmdb_credit_id&#x27;</span>],</span><br><span class="line">        ];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable">$producer</span> = <span class="variable language_">$this</span>-&gt;container-&gt;<span class="title function_ invoke__">get</span>(<span class="title class_">Producer</span>::<span class="variable language_">class</span>);</span><br><span class="line">    <span class="variable">$tmdbCredit</span> = <span class="keyword">new</span> <span class="title class_">TmdbCreditProducer</span>(<span class="variable">$data</span>);</span><br><span class="line">    <span class="variable">$result</span> = <span class="variable">$producer</span>-&gt;<span class="title function_ invoke__">produce</span>(<span class="variable">$tmdbCredit</span>);</span><br><span class="line">&#125;);</span><br><span class="line">        </span><br></pre></td></tr></table></figure>
+
+<p><code>TmdbMovieCast::select(&#39;tmdb_credit_id&#39;)-&gt;get();</code> 即便不用toArray()，也可以使用foreach取出数据：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$MovieList</span> = <span class="title class_">Movie</span>::<span class="title function_ invoke__">select</span>(<span class="string">&#x27;name&#x27;</span>)-&gt;<span class="title function_ invoke__">get</span>();</span><br><span class="line"><span class="keyword">foreach</span> (<span class="variable">$MovieList</span> <span class="keyword">as</span> <span class="variable">$movie</span>) &#123;</span><br><span class="line">    <span class="comment">//  两种都能取出数据</span></span><br><span class="line">    <span class="title function_ invoke__">var_dump</span>(<span class="variable">$movie</span>-&gt;name);</span><br><span class="line">    <span class="title function_ invoke__">var_dump</span>(<span class="variable">$movie</span>[<span class="string">&#x27;name&#x27;</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h4 id="删除模型"><a href="#删除模型" class="headerlink" title="删除模型"></a>删除模型</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Model</span>\<span class="title">Test01</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable">$test01</span> = <span class="title class_">Test01</span>::<span class="title function_ invoke__">query</span>()-&gt;<span class="title function_ invoke__">find</span>(<span class="number">10</span>);</span><br><span class="line"><span class="variable">$test01</span>-&gt;<span class="title function_ invoke__">delete</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// $test01 = Test01::query()-&gt;where(&#x27;id&#x27;,9)-&gt;delete();</span></span><br><span class="line"><span class="comment">// return $test01;  // delete() 返回0或1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<h4 id="DB-原生查询"><a href="#DB-原生查询" class="headerlink" title="DB 原生查询"></a>DB 原生查询</h4><p><code>DB::select</code><br>该方法将一个SQL查询字符串作为参数，返回一个包含查询结果的数组。以下是一个使用DB::select方法查询用户表的示例：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 预编译语句</span></span><br><span class="line"><span class="variable">$users</span> = DB::<span class="title function_ invoke__">select</span>(<span class="string">&#x27;SELECT name, email FROM users WHERE active = ?&#x27;</span>, [<span class="number">1</span>]);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<p><code>DB::raw()</code><br>不将表达式作为字符串处理，而将其视为原生SQL语句。以下是一个使用DB::raw函数的例子：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$email</span> = <span class="string">&quot;test@example.com&#x27;; DELETE FROM users; -- &quot;</span>;</span><br><span class="line"><span class="variable">$users</span> = DB::<span class="title function_ invoke__">select</span>(DB::<span class="title function_ invoke__">raw</span>(<span class="string">&quot;SELECT name, email FROM users WHERE email = &#x27;<span class="subst">$email</span>&#x27;&quot;</span>));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<p><code>......</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 插入</span></span><br><span class="line"> <span class="variable">$data</span> = DB::<span class="title function_ invoke__">insert</span>(<span class="string">&quot;insert into test01(conn) values (&#x27;DBtest&#x27;)&quot;</span>);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 更新</span></span><br><span class="line"><span class="variable">$data</span> = DB::<span class="title function_ invoke__">update</span>(<span class="string">&quot;update test01 set conn=? where id=?&quot;</span>,[<span class="string">&quot;DBU&quot;</span>,<span class="number">19</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除</span></span><br><span class="line"><span class="variable">$data</span> = DB::<span class="title function_ invoke__">delete</span>(<span class="string">&quot;delete from test01 where id=?&quot;</span>,[<span class="number">19</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查询</span></span><br><span class="line"><span class="variable">$data</span> = <span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;test01&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>([<span class="string">&quot;id&quot;</span>=&gt;<span class="number">18</span>])-&gt;<span class="title function_ invoke__">orWhere</span>([<span class="string">&quot;id&quot;</span>=&gt;<span class="number">17</span>])-&gt;<span class="title function_ invoke__">get</span>();</span><br><span class="line"><span class="variable">$data</span> = <span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;test01&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>([<span class="string">&quot;id&quot;</span>=&gt;<span class="number">1</span>,<span class="string">&quot;conn&quot;</span>=&gt;<span class="string">&quot;aa&quot;</span>])-&gt;<span class="title function_ invoke__">get</span>()-&gt;<span class="title function_ invoke__">toArray</span>();   <span class="comment">## where传关联数组</span></span><br><span class="line"><span class="variable">$data</span> = <span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;test01&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>([<span class="string">&quot;id&quot;</span>=&gt;<span class="number">1</span>])-&gt;<span class="title function_ invoke__">where</span>([<span class="string">&quot;conn&quot;</span>=&gt;<span class="string">&quot;aa&quot;</span>])-&gt;<span class="title function_ invoke__">get</span>()-&gt;<span class="title function_ invoke__">toArray</span>();  <span class="comment">## 多个where方法</span></span><br><span class="line"><span class="variable">$data</span> = <span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;test01&#x27;</span>)-&gt;<span class="title function_ invoke__">where</span>([])-&gt;<span class="title function_ invoke__">get</span>()-&gt;<span class="title function_ invoke__">toArray</span>();  <span class="comment">## 条件空</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h3 id="事务回滚"><a href="#事务回滚" class="headerlink" title="事务回滚"></a>事务回滚</h3><h4 id="自动管理数据库事务"><a href="#自动管理数据库事务" class="headerlink" title="自动管理数据库事务"></a>自动管理数据库事务</h4><p>你可以使用 <code>Db</code> 的 <code>transaction</code> 方法在数据库事务中运行一组操作。如果事务的闭包 <code>Closure</code> 中出现一个异常，事务将会回滚。如果事务闭包 <code>Closure</code> 执行成功，事务将自动提交。一旦你使用了 <code>transaction</code> ， 就不再需要担心手动回滚或提交的问题：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">DbConnection</span>\<span class="title">Db</span>;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">transaction</span>(function () &#123;</span><br><span class="line">    <span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;user&#x27;</span>)-&gt;<span class="title function_ invoke__">update</span>([<span class="string">&#x27;votes&#x27;</span> =&gt; <span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line">    <span class="title class_">Db</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;posts&#x27;</span>)-&gt;<span class="title function_ invoke__">delete</span>();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="手动管理数据库事务"><a href="#手动管理数据库事务" class="headerlink" title="手动管理数据库事务"></a>手动管理数据库事务</h4><p>如果你想要手动开始一个事务，并且对回滚和提交能够完全控制，那么你可以使用 <code>Db</code> 的 <code>beginTransaction</code>, <code>commit</code>, <code>rollBack</code>:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">DbConnection</span>\<span class="title">Db</span>;</span><br><span class="line"></span><br><span class="line"><span class="title class_">Db</span>::<span class="title function_ invoke__">beginTransaction</span>();</span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Do something...</span></span><br><span class="line"></span><br><span class="line">    <span class="title class_">Db</span>::<span class="title function_ invoke__">commit</span>();</span><br><span class="line">&#125; <span class="keyword">catch</span>(\<span class="built_in">Throwable</span> <span class="variable">$ex</span>)&#123;</span><br><span class="line">    <span class="title class_">Db</span>::<span class="title function_ invoke__">rollBack</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>在Web开发中，路由是指根据用户请求的URL地址，将请求分发到相应的处理器。通过定义路由规则，可以实现不同URL地址对应不同的处理逻辑，实现灵活的页面跳转和数据处理。</p>
+<h3 id="注释定义路由"><a href="#注释定义路由" class="headerlink" title="注释定义路由"></a>注释定义路由</h3><p><code>#[Controller]</code> 为满足更细致的路由定义需求而存在，使用 <code>#[Controller]</code> 注解用于表明当前类为一个 Controller 类，同时需配合 <code>#[RequestMapping]</code> 注解来对请求方法和请求路径进行更详细的定义。<br>在 Controller 目录下创建文件</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">declare</span>(strict_types=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">Controller</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">HttpServer</span>\<span class="title">Contract</span>\<span class="title">RequestInterface</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">HttpServer</span>\<span class="title">Annotation</span>\<span class="title">Controller</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">HttpServer</span>\<span class="title">Annotation</span>\<span class="title">RequestMapping</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[Controller</span><span class="meta">]</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NewController</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="meta">#[RequestMapping</span>(<span class="attr">path</span>: <span class="string">&quot;/php/info&quot;</span>, <span class="attr">methods</span>: <span class="string">&quot;get,post&quot;</span>)<span class="meta">]</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">info</span>(<span class="params">RequestInterface <span class="variable">$request</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 从请求中获得 id 参数，存在则返回，不存在则返回默认值 1</span></span><br><span class="line">        <span class="variable">$id</span> = <span class="variable">$request</span>-&gt;<span class="title function_ invoke__">input</span>(<span class="string">&#x27;id&#x27;</span>, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> [</span><br><span class="line">            <span class="string">&#x27;id&#x27;</span> =&gt; <span class="variable">$id</span>,</span><br><span class="line">            <span class="string">&#x27;all&#x27;</span> =&gt; <span class="variable">$request</span>-&gt;<span class="title function_ invoke__">all</span>()</span><br><span class="line">        ];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">#[RequestMapping</span>(<span class="attr">path</span>: <span class="string">&quot;/php/index&quot;</span>, <span class="attr">methods</span>: <span class="string">&quot;get&quot;</span>)<span class="meta">]</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span>(<span class="params">RequestInterface <span class="variable">$request</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 存在则返回，不存在则返回默认值 null</span></span><br><span class="line">        <span class="variable">$id</span> = <span class="variable">$request</span>-&gt;<span class="title function_ invoke__">route</span>(<span class="string">&#x27;id&#x27;</span>);</span><br><span class="line">        <span class="comment">// 存在则返回，不存在则返回默认值 0</span></span><br><span class="line">        <span class="variable">$id</span> = <span class="variable">$request</span>-&gt;<span class="title function_ invoke__">route</span>(<span class="string">&#x27;id&#x27;</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> [</span><br><span class="line">            <span class="string">&#x27;id&#x27;</span> =&gt; <span class="variable">$id</span>,</span><br><span class="line">            <span class="string">&#x27;all&#x27;</span> =&gt; <span class="variable">$request</span>-&gt;<span class="title function_ invoke__">all</span>()</span><br><span class="line">        ];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h3 id="普通路由"><a href="#普通路由" class="headerlink" title="普通路由"></a>普通路由</h3><p>在 config&#x2F;routes.php 文件内完成所有的路由定义</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 我的测试代码：</span></span><br><span class="line"><span class="title class_">Router</span>::<span class="title function_ invoke__">addRoute</span>(</span><br><span class="line">    [<span class="string">&#x27;GET&#x27;</span>],</span><br><span class="line">    <span class="string">&#x27;/php/test&#123;id:\d+&#125;&#x27;</span>,   //（&#123;<span class="attr">id</span>:\d+&#125; id的值必须匹配<span class="number">0</span>~<span class="number">9</span>的数字一次）</span><br><span class="line">    <span class="string">&#x27;App\Controller\TwoController@info&#x27;</span>);</span><br><span class="line"><span class="title class_">Router</span>::<span class="title function_ invoke__">addRoute</span>(</span><br><span class="line">    [<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>, <span class="string">&#x27;HEAD&#x27;</span>],</span><br><span class="line">    <span class="string">&#x27;/php/test&#123;str:[a-z]+&#125;&#x27;</span>,   // &#123;<span class="attr">str</span>:[a-z]+&#125; str的值必须匹配a~z的字母一次</span><br><span class="line">    <span class="string">&#x27;App\Controller\TwoController@info2&#x27;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 各个添加路由方法</span></span><br><span class="line"><span class="comment">## 通过get请求方式访问 /test1 目录，返回的值写在test1方法里</span></span><br><span class="line"><span class="title class_">Router</span>::<span class="title function_ invoke__">get</span>(<span class="string">&#x27;/test1&#x27;</span>,<span class="string">&#x27;App\Controller\TestController::test1&#x27;</span>);</span><br><span class="line"><span class="title class_">Router</span>::<span class="title function_ invoke__">get</span>(<span class="string">&#x27;/test2&#x27;</span>,<span class="string">&#x27;App\Controller\TestController@test2&#x27;</span>);</span><br><span class="line"><span class="title class_">Router</span>::<span class="title function_ invoke__">get</span>(<span class="string">&#x27;/test3&#x27;</span>,[<span class="title class_">\App\Controller\TestController</span>::<span class="variable language_">class</span>,<span class="string">&#x27;test3&#x27;</span>]);</span><br><span class="line"><span class="comment">//下面为示例另外写法</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Router::post(&#x27;/post&#x27;, &#x27;App\Controller\IndexController::post&#x27;);</span></span><br><span class="line"><span class="comment">Router::post(&#x27;/post&#x27;, &#x27;App\Controller\IndexController<span class="doctag">@post</span>&#x27;);</span></span><br><span class="line"><span class="comment">Router::post(&#x27;/post&#x27;, [\App\Controller\IndexController::class, &#x27;post&#x27;]);</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Router::addRoute([&#x27;GET&#x27;, &#x27;POST&#x27;, &#x27;HEAD&#x27;], &#x27;/multi&#x27;, &#x27;App\Controller\IndexController::multi&#x27;);</span></span><br><span class="line"><span class="comment">Router::addRoute([&#x27;GET&#x27;, &#x27;POST&#x27;, &#x27;HEAD&#x27;], &#x27;/multi&#x27;, &#x27;App\Controller\IndexController<span class="doctag">@multi</span>&#x27;);</span></span><br><span class="line"><span class="comment">Router::addRoute([&#x27;GET&#x27;, &#x27;POST&#x27;, &#x27;HEAD&#x27;], &#x27;/multi&#x27;, [\App\Controller\IndexController::class, &#x27;multi&#x27;]);</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>必填参数</strong><br>可以对 $uri 进行一些参数定义，通过 {} 来声明参数，如 <code>/user/&#123;id&#125;</code> 则声明了 id 值为一个必填参数。</p>
+<p><strong>可选参数</strong><br>可以通过 [] 来声明中括号内的参数为一个可选参数，如 <code>/user/[&#123;id&#125;]</code>。</p>
+<p><strong>校验参数</strong><br>可以使用正则表达式对参数进行校验</p>
+<p>以下是一些例子</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">HttpServer</span>\<span class="title">Router</span>\<span class="title">Router</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以匹配 /user/42, 但不能匹配 /user/xyz    </span></span><br><span class="line"><span class="title class_">Router</span>::<span class="title function_ invoke__">addRoute</span>(<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;/user/&#123;id:\d+&#125;&#x27;</span>, <span class="string">&#x27;handler&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以匹配 /user/foobar, 但不能匹配 /user/foo/bar</span></span><br><span class="line"><span class="title class_">Router</span>::<span class="title function_ invoke__">addRoute</span>(<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;/user/&#123;name&#125;&#x27;</span>, <span class="string">&#x27;handler&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 也可以匹配 /user/foo/bar as well</span></span><br><span class="line"><span class="title class_">Router</span>::<span class="title function_ invoke__">addRoute</span>(<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;/user/&#123;name:.+&#125;&#x27;</span>, <span class="string">&#x27;handler&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这个路由</span></span><br><span class="line"><span class="title class_">Router</span>::<span class="title function_ invoke__">addRoute</span>(<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;/user/&#123;id:\d+&#125;[/&#123;name&#125;]&#x27;</span>, <span class="string">&#x27;handler&#x27;</span>);</span><br><span class="line"><span class="comment">// 等同于以下的两个路由</span></span><br><span class="line"><span class="title class_">Router</span>::<span class="title function_ invoke__">addRoute</span>(<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;/user/&#123;id:\d+&#125;&#x27;</span>, <span class="string">&#x27;handler&#x27;</span>);</span><br><span class="line"><span class="title class_">Router</span>::<span class="title function_ invoke__">addRoute</span>(<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;/user/&#123;id:\d+&#125;/&#123;name&#125;&#x27;</span>, <span class="string">&#x27;handler&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 多个可选的嵌套也是允许的</span></span><br><span class="line"><span class="title class_">Router</span>::<span class="title function_ invoke__">addRoute</span>(<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;/user[/&#123;id:\d+&#125;[/&#123;name&#125;]]&#x27;</span>, <span class="string">&#x27;handler&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这是一条无效的路由, 因为可选部分只能出现在最后</span></span><br><span class="line"><span class="title class_">Router</span>::<span class="title function_ invoke__">addRoute</span>(<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;/user[/&#123;id:\d+&#125;]/&#123;name&#125;&#x27;</span>, <span class="string">&#x27;handler&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h3 id="各个函数解释"><a href="#各个函数解释" class="headerlink" title="各个函数解释"></a>各个函数解释</h3><p><strong>input</strong><br>通过 <code>input(string key, default = null)</code> 和 <code>inputs(array keys, default = null): array</code> 获取指定 一个 或 多个 任意形式的输入值：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 存在则返回，不存在则返回 null</span></span><br><span class="line"><span class="variable">$name</span> = <span class="variable">$request</span>-&gt;<span class="title function_ invoke__">input</span>(<span class="string">&#x27;name&#x27;</span>);</span><br><span class="line"><span class="comment">// 存在则返回，不存在则返回默认值 Hyperf</span></span><br><span class="line"><span class="variable">$name</span> = <span class="variable">$request</span>-&gt;<span class="title function_ invoke__">input</span>(<span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;Hyperf&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<p><strong>all()</strong><br>以数组形式获取到所有输入数据:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$all</span> = <span class="variable">$request</span>-&gt;<span class="title function_ invoke__">all</span>();</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<p><strong>route</strong><br>与input功能差不多但是它可以从路径、参数、查询参数中获取值。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="variable">$str</span> = <span class="variable">$request</span>-&gt;<span class="title function_ invoke__">route</span>(<span class="string">&#x27;str&#x27;</span>,<span class="string">&#x27;a&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h2 id="视图引擎"><a href="#视图引擎" class="headerlink" title="视图引擎"></a>视图引擎</h2><h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer require hyperf/view-engine</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="生成配置"><a href="#生成配置" class="headerlink" title="生成配置"></a>生成配置</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php bin/hyperf.php vendor:publish hyperf/view-engine</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>在 config&#x2F;autoload 下找到配置文件 view.php，在根目录下创建存放视图文件的目录</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i0.hdslb.com/bfs/openplatform/8f8e69aa9ff09190a298639b1433d6629e2ceb60.png"></p>
+<br/>
+
+<br/>
+
+<p>在对应的目录里创建视图文件 index.blade.php（没有&#x2F;storage&#x2F;view就在根目录下创建）。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">&quot;en&quot;</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">&quot;UTF-8&quot;</span>&gt;</span><br><span class="line">    &lt;title&gt;Hyperf&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">Hello, &#123;&#123; <span class="variable">$name</span> &#125;&#125;. You are using blade template now.</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<p>控制器中获取 Hyperf\View\Render 实例，然后调用 render 方法并传递视图文件地址 index 和 渲染数据 即可，文件地址忽略视图文件的后缀名。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span>(strict_types=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">Controller</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">HttpServer</span>\<span class="title">Annotation</span>\<span class="title">AutoController</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">View</span>\<span class="title">RenderInterface</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[AutoController</span><span class="meta">]</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span>(<span class="params">RenderInterface <span class="variable">$render</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$render</span>-&gt;<span class="title function_ invoke__">render</span>(<span class="string">&#x27;index&#x27;</span>, [<span class="string">&#x27;name&#x27;</span> =&gt; <span class="string">&#x27;Hyperf&#x27;</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<p>访问对应的 URL，即可获得如下所示的视图页面：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello, Hyperf. You are using blade template now.</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h2 id="数据库迁移-操作"><a href="#数据库迁移-操作" class="headerlink" title="数据库迁移&#x2F;操作"></a>数据库迁移&#x2F;操作</h2><p>记录一下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span>(strict_types=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">Command</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Model</span>\<span class="title">User</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">Command</span>\<span class="title">Command</span> <span class="keyword">as</span> <span class="title">HyperfCommand</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">Command</span>\<span class="title">Annotation</span>\<span class="title">Command</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">Database</span>\<span class="title">Schema</span>\<span class="title">Blueprint</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">Database</span>\<span class="title">Schema</span>\<span class="title">Schema</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">DbConnection</span>\<span class="title">Db</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">Di</span>\<span class="title">Annotation</span>\<span class="title">Inject</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">Logger</span>\<span class="title">LoggerFactory</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Psr</span>\<span class="title">Container</span>\<span class="title">ContainerInterface</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Psr</span>\<span class="title">Log</span>\<span class="title">LoggerInterface</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[Command</span><span class="meta">]</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">test_print</span> <span class="keyword">extends</span> <span class="title">HyperfCommand</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="meta">#[Inject</span><span class="meta">]</span></span><br><span class="line">    <span class="keyword">protected</span> LoggerInterface <span class="variable">$logger</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="keyword">protected</span> ContainerInterface <span class="variable">$container</span>,LoggerFactory <span class="variable">$loggerFactory</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">parent</span>::<span class="title function_ invoke__">__construct</span>(<span class="string">&#x27;test_mysql&#x27;</span>);</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;logger = <span class="variable">$loggerFactory</span>-&gt;<span class="title function_ invoke__">get</span>(<span class="string">&#x27;数据库迁移&#x27;</span>, <span class="string">&#x27;command&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">configure</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">parent</span>::<span class="title function_ invoke__">configure</span>();</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;<span class="title function_ invoke__">setDescription</span>(<span class="string">&#x27;Hyperf Demo Command&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="title function_ invoke__">var_dump</span>(<span class="string">&#x27;数据库迁移脚本执行&#x27;</span>);</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;logger-&gt;<span class="title function_ invoke__">info</span>(<span class="string">&quot;数据库迁移脚本执行&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 迁移文件</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="title class_">Db</span>::<span class="title function_ invoke__">statement</span>(<span class="string">&quot;CREATE TABLE new_table SELECT * FROM users&quot;</span>); <span class="comment">// 只复制结构</span></span><br><span class="line">            <span class="title class_">Db</span>::<span class="title function_ invoke__">statement</span>(<span class="string">&quot;INSERT INTO new_table SELECT * FROM users&quot;</span>); <span class="comment">// 复制数据</span></span><br><span class="line">        &#125; <span class="keyword">catch</span> (\<span class="built_in">Exception</span> <span class="variable">$e</span>)&#123;</span><br><span class="line">            <span class="title function_ invoke__">var_dump</span>(<span class="string">&#x27;数据迁移出错&#x27;</span>);</span><br><span class="line">            <span class="title function_ invoke__">var_dump</span>(<span class="variable">$e</span>-&gt;<span class="title function_ invoke__">getMessage</span>());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 检查字段并添加</span></span><br><span class="line">        <span class="title class_">Schema</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;new_table&#x27;</span>, function (Blueprint <span class="variable">$table</span>) &#123;</span><br><span class="line">            <span class="comment">// 检查字段是否存在，如果不存在则添加</span></span><br><span class="line">            <span class="keyword">if</span> (!<span class="title class_">Schema</span>::<span class="title function_ invoke__">hasColumn</span>(<span class="string">&#x27;new_table&#x27;</span>, <span class="string">&#x27;new_column&#x27;</span>)) &#123;</span><br><span class="line">                <span class="variable">$table</span>-&gt;<span class="keyword">string</span>(<span class="string">&#x27;new_column&#x27;</span>, <span class="number">100</span>)-&gt;<span class="title function_ invoke__">nullable</span>()-&gt;<span class="title function_ invoke__">comment</span>(<span class="string">&#x27;新字段&#x27;</span>);</span><br><span class="line">                <span class="title function_ invoke__">var_dump</span>(<span class="string">&#x27;字段创建成功&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 检查字段并删除</span></span><br><span class="line">        <span class="title class_">Schema</span>::<span class="title function_ invoke__">table</span>(<span class="string">&#x27;new_table&#x27;</span>, function (Blueprint <span class="variable">$table</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="title class_">Schema</span>::<span class="title function_ invoke__">hasColumn</span>(<span class="string">&#x27;new_table&#x27;</span>, <span class="string">&#x27;new_column&#x27;</span>)) &#123;</span><br><span class="line">                <span class="variable">$table</span>-&gt;<span class="title function_ invoke__">dropColumn</span>(<span class="string">&#x27;new_column&#x27;</span>);</span><br><span class="line">                <span class="title function_ invoke__">var_dump</span>(<span class="string">&#x27;字段删除成功&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<br>
+
+<br>
+
+</article>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2025/05/26/hyperf%20%E5%B0%8F%E7%AC%94%E8%AE%B0/">Hyperf 小笔记</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2025/05/22/hello-world/">Hello World</a></div></section></div>
+
+
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="text"><p>本站由 <a href="/">ShanMoYu</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1">Stellar 1.29.1</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+<widget class="widget-wrapper ghrepo"><div class="widget-body"><div class="items ds-ghinfo" api="https://api.github.com/repos/hyperf/hyperf"><a class="repo" href="https://github.com/hyperf/hyperf" target="_blank" rel="external nofollow noopener noreferrer"><div class="repo-name flex-row"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"></path></svg>hyperf/hyperf</div><div class="repo-desc"><span type="text" id="description">&nbsp;</span></div><div class="grid"><div class="flex-row"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.564.41l-3.097.45 2.24 2.184a.75.75 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01.698 0l2.77 1.456-.53-3.084a.75.75 0 01.216-.664l2.24-2.183-3.096-.45a.75.75 0 01-.564-.41L8 2.694v.001z"></path></svg><span type="text" id="stargazers_count"></span></div><div class="flex-row"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path></svg><span type="text" id="forks_count"></span></div><div class="flex-row ds-ghinfo" index="0" api="https://api.github.com/repos/hyperf/hyperf/tags"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z"></path></svg><span type="text" id="latest-tag-name">0</span></div></div></a></div></div></widget>
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%93%8D%E4%BD%9C"><span class="toc-text">数据库操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-text">安装插件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E5%BA%93%E8%BF%9E%E6%8E%A5"><span class="toc-text">多库连接</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%A8%A1%E5%9E%8B"><span class="toc-text">创建模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E6%88%B3"><span class="toc-text">时间戳</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C"><span class="toc-text">操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%92%E5%85%A5%E6%A8%A1%E5%9E%8B"><span class="toc-text">插入模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E6%A8%A1%E5%9E%8B"><span class="toc-text">更新模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%A8%A1%E5%9E%8B"><span class="toc-text">查询模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E5%9D%97%E6%9F%A5%E8%AF%A2%E4%BB%A5%E5%8F%8A%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">分块查询以及注意事项*</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%A8%A1%E5%9E%8B"><span class="toc-text">删除模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DB-%E5%8E%9F%E7%94%9F%E6%9F%A5%E8%AF%A2"><span class="toc-text">DB 原生查询</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E5%8A%A1%E5%9B%9E%E6%BB%9A"><span class="toc-text">事务回滚</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E7%AE%A1%E7%90%86%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1"><span class="toc-text">自动管理数据库事务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%89%8B%E5%8A%A8%E7%AE%A1%E7%90%86%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%8B%E5%8A%A1"><span class="toc-text">手动管理数据库事务</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1"><span class="toc-text">路由</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A%E5%AE%9A%E4%B9%89%E8%B7%AF%E7%94%B1"><span class="toc-text">注释定义路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E8%B7%AF%E7%94%B1"><span class="toc-text">普通路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%84%E4%B8%AA%E5%87%BD%E6%95%B0%E8%A7%A3%E9%87%8A"><span class="toc-text">各个函数解释</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%86%E5%9B%BE%E5%BC%95%E6%93%8E"><span class="toc-text">视图引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-1"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E9%85%8D%E7%BD%AE"><span class="toc-text">生成配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BB-%E6%93%8D%E4%BD%9C"><span class="toc-text">数据库迁移&#x2F;操作</span></a></li></ol></div><div class="widget-footer">
+
+<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a></div></widget>
+</div></aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js`,
+    marked: `https://cdn.jsdelivr.net/npm/marked@13.0.1/lib/marked.umd.min.js`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+    
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
+
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+
+<!-- required -->
+<script src="/js/main.js?v=1.29.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    applyThemeToGiscus(theme)
+  }
+
+  const applyThemeToGiscus = (theme) => {
+    theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    }
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>

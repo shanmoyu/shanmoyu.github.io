@@ -1,0 +1,48 @@
+name: Hyperf
+
+title: Hyperf  - 渐进式 PHP 协程框架
+subtitle: '渐进式 PHP 协程框架 | http://example.com'
+tags: [笔记]
+icon: /images/hyperf_logo.png
+
+cover: /images/hyperf_logo.png
+coverpage: true
+description: Hyperf 是一个高性能、高灵活性的渐进式 PHP 协程框架，内置协程服务器及大量常用的组件。
+
+repo: hyperf/hyperf
+search:
+  filter: /wiki/
+  placeholder: 在 Stellar 中搜索...
+leftbar: 
+  - recent
+  
+  - tree
+  - timeline_stellar_releases
+  - related
+
+
+tree:
+  '快速开始':
+    - index
+    - examples
+    - releases
+  '基本使用':
+    - theme-settings
+    - pages
+    - sidebar
+    - tag-plugins
+    - tag-plugins/express
+    - tag-plugins/data
+    - tag-plugins/container
+    - comments
+  '文档系统':
+    - wiki-settings
+  '进阶玩法':
+    - widgets
+    - advanced-settings
+    - notes
+    - fcircle
+  '技术支持':
+    - articles
+    - todo
+    - contributors

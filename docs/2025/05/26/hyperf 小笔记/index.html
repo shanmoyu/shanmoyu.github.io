@@ -1,0 +1,784 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1" theme-name="Stellar" theme-version="1.29.1">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  
+  <title>Hyperf 小笔记 - (゜-゜)つロ 干杯 d===(￣▽￣*)b</title>
+
+  
+    <meta name="description" content="VSCodeVSCode格式化快捷键Shift + Alt + F   强制折叠123&#x2F;&#x2F;#regiont&#x2F;&#x2F;........&#x2F;&#x2F;#endregion      Hyperf  CORS跨域请求问题中间件添加 123456789101112131415161718192021222324252627282930313233343536373839404142&lt;?phpdeclare(stri">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hyperf 小笔记">
+<meta property="og:url" content="http://example.com/2025/05/26/hyperf%20%E5%B0%8F%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="(゜-゜)つロ 干杯 d&#x3D;&#x3D;&#x3D;(￣▽￣*)b">
+<meta property="og:description" content="VSCodeVSCode格式化快捷键Shift + Alt + F   强制折叠123&#x2F;&#x2F;#regiont&#x2F;&#x2F;........&#x2F;&#x2F;#endregion      Hyperf  CORS跨域请求问题中间件添加 123456789101112131415161718192021222324252627282930313233343536373839404142&lt;?phpdeclare(stri">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/hyperf%E5%B0%8F%E7%AC%94%E8%AE%B0/39f83d9b0f605357e70dd2763f55d74a.png">
+<meta property="og:image" content="http://example.com/images/blbl.png">
+<meta property="article:published_time" content="2025-05-26T05:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-07T09:52:09.894Z">
+<meta property="article:author" content="ShanMoYu">
+<meta property="article:tag" content="php">
+<meta property="article:tag" content="hyperf">
+<meta property="article:tag" content="VSCode">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="PhpStorm">
+<meta property="article:tag" content="Typora">
+<meta property="article:tag" content="mysql">
+<meta property="article:tag" content="小笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/hyperf%E5%B0%8F%E7%AC%94%E8%AE%B0/39f83d9b0f605357e70dd2763f55d74a.png">
+  
+  
+  
+  <meta name="keywords" content="php,hyperf,VSCode,Docker,PhpStorm,Typora,mysql,小笔记">
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.29.1">
+
+  
+    <link rel="shortcut icon" href="/images/clash.svg">
+  
+
+  
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.6.0/lxgwwenkaiscreen.css"><link rel="stylesheet" href="/my.css"><script src="/my.js"></script>
+</head>
+<body>
+
+<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/头像.webp" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">ShanMoYu</div><div class="sub normal cap">不知道写什么就先占着</div><div class="sub hover cap" style="opacity:0"> Designed by SMY</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<nav class="menu dis-select"><a class="nav-item active" title="博客" href="/" style="color:#1BCDFC"><span>博客</span></a><a class="nav-item" title="文档" href="/wiki/" style="color:#3DC550"><span>文档</span></a><a class="nav-item" title="社交" href="/friends/" style="color:#F44336"><span>社交</span></a></nav>
+</div>
+<div class="widgets">
+
+
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/2025/05/26/hyperf/"><span class="title">Hyperf</span></a><a class="item title" href="/2025/05/26/hyperf%20%E5%B0%8F%E7%AC%94%E8%AE%B0/"><span class="title">Hyperf 小笔记</span></a><a class="item title" href="/2025/06/04/kratos%20%E5%AD%A6%E4%B9%A0/"><span class="title">kratos 学习</span></a><a class="item title" href="/2025/06/04/kratos%20%E5%B0%8F%E7%AC%94%E8%AE%B0/"><span class="title">kratos 小笔记</span></a><a class="item title" href="/2025/05/26/Hyperf%20%E5%BF%AB%E9%80%9F%E5%AD%A6%E4%B9%A0/"><span class="title">Hyperf 快速学习</span></a><a class="item title" href="/2025/05/29/Hyperf%20%E5%85%B6%E4%BB%96%E7%BB%84%E4%BB%B6/"><span class="title">Hyperf 其他组件</span></a><a class="item title" href="/2025/05/29/Hyperf%20%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/"><span class="title">Hyperf 日志服务前置学习</span></a><a class="item title" href="/2025/06/04/kratos%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87%E5%92%8C%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/"><span class="title">kratos环境准备和工具安装</span></a><a class="item title" href="/2025/05/22/hello-world/"><span class="title">Hello World</span></a></div></widget>
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" title="Github" href="/" rel="noopener noreferrer"><svg t="1749544483694" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3318" width="200" height="200"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9 23.5 23.2 38.1 55.4 38.1 91v112.5c0.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z" p-id="3319"></path></svg></a><a class="social" title="Steam" href="/" rel="noopener noreferrer"><svg t="1749544605406" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4332" width="200" height="200"><path d="M904 332.571429q0 57.714286-40.857143 98.571429t-98.571429 40.857143-98.571429-40.857143-40.857143-98.571429 40.857143-98.571429 98.571429-40.857143 98.571429 40.857143 40.857143 98.571429zm-440 424q0-59.428571-41.714286-101.142857t-101.142857-41.714286q-15.428571 0-30.857143 3.428571l59.428571 24q44 17.714286 62.571429 60.857143t0.857143 86.571429q-17.714286 44-61.142857 62.285714t-86.857143 0.571429q-12-4.571429-35.428571-14t-34.857143-14q18.285714 34.285714 52 55.142857t74.285714 20.857143q59.428571 0 101.142857-41.714286t41.714286-101.142857zm474.285714-423.428571q0-72-51.142857-123.142857t-123.142857-51.142857q-72.571429 0-123.714286 51.142857t-51.142857 123.142857q0 72.571429 51.142857 123.428571t123.714286 50.857143q72 0 123.142857-50.857143t51.142857-123.428571zm85.714286 0q0 108-76.285714 184t-183.714286 76l-249.714286 182.285714q-6.857143 73.714286-62.285714 124.571429t-130.857143 50.857143q-69.142857 0-122.285714-43.428571t-67.428571-109.714286l-131.428571-52.571429 0-245.142857 222.285714 89.714286q45.142857-27.428571 98.857143-27.428571 7.428571 0 20 1.142857l162.285714-232.571429q1.142857-106.857143 77.428571-182.285714t183.142857-75.428571q107.428571 0 183.714286 76.285714t76.285714 183.714286z" p-id="4333"></path></svg></a><a class="social" title="bilibili" href="/" rel="noopener noreferrer"><svg t="1749544944631" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="11834" width="200" height="200"><path d="M777.514667 131.669333a53.333333 53.333333 0 0 1 0 75.434667L728.746667 255.829333h49.92A160 160 0 0 1 938.666667 415.872v320a160 160 0 0 1-160 160H245.333333A160 160 0 0 1 85.333333 735.872v-320a160 160 0 0 1 160-160h49.749334L246.4 207.146667a53.333333 53.333333 0 0 1 75.392-75.434667l113.152 113.152c3.370667 3.370667 6.186667 7.04 8.448 10.965333h137.088c2.261333-3.925333 5.12-7.68 8.490667-11.008l113.109333-113.152a53.333333 53.333333 0 0 1 75.434667 0z m1.152 231.253334H245.333333a53.333333 53.333333 0 0 0-53.205333 49.365333l-0.128 4.010667v320c0 28.117333 21.76 51.114667 49.365333 53.162666l3.968 0.170667h533.333334a53.333333 53.333333 0 0 0 53.205333-49.365333l0.128-3.968v-320c0-29.44-23.893333-53.333333-53.333333-53.333334z m-426.666667 106.666666c29.44 0 53.333333 23.893333 53.333333 53.333334v53.333333a53.333333 53.333333 0 1 1-106.666666 0v-53.333333c0-29.44 23.893333-53.333333 53.333333-53.333334z m320 0c29.44 0 53.333333 23.893333 53.333333 53.333334v53.333333a53.333333 53.333333 0 1 1-106.666666 0v-53.333333c0-29.44 23.893333-53.333333 53.333333-53.333334z" p-id="11835" ></path></svg></a><a class="social" title="Tag" href="/tags" rel="noopener noreferrer"><svg t="1749545003744" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="12936" width="200" height="200"><path d="M788.48 629.418667c0-17.066667-5.802667-31.744-17.749333-44.714667L421.205333 235.861333c-12.288-12.288-29.354667-22.869333-49.834667-31.744-21.162667-8.874667-39.936-12.970667-57.002667-12.970667L110.933333 191.146667c-17.066667 0-31.744 6.485333-44.032 18.773333-12.288 12.288-18.773333 26.965333-18.773333 44.032l0 202.752c0 17.066667 4.096 36.522667 12.970667 57.002667 8.874667 21.162667 18.773333 37.546667 31.744 49.834667l349.525333 349.525333c12.288 12.288 26.965333 17.749333 44.032 17.749333 17.066667 0 31.744-5.802667 44.714667-17.749333l239.616-239.616C781.994667 661.162667 788.48 646.485333 788.48 629.418667L788.48 629.418667 788.48 629.418667zM248.490667 392.192c-12.288 12.288-26.965333 18.090667-44.032 18.090667-17.066667 0-31.744-5.802667-44.032-18.090667-12.288-12.288-18.090667-26.965333-18.090667-44.032 0-17.066667 5.802667-31.744 18.090667-44.032 12.288-12.288 26.965333-18.090667 44.032-18.090667 17.066667 0 31.744 5.802667 44.032 18.090667C260.778667 316.416 266.24 331.093333 266.24 348.16 267.264 365.568 260.778667 379.904 248.490667 392.192L248.490667 392.192 248.490667 392.192zM958.122667 584.362667 608.597333 235.861333c-12.288-12.288-29.354667-22.869333-49.834667-31.744C537.6 195.242667 518.826667 191.146667 501.76 191.146667l-109.909333 0c17.066667 0 36.522667 4.096 57.002667 12.970667 21.162667 8.874667 37.546667 18.773333 49.834667 31.744l349.525333 348.501333c12.288 12.970667 18.090667 27.648 18.090667 44.714667s-5.802667 31.744-18.090667 44.032l-229.034667 229.717333c9.898667 9.898667 18.773333 17.066667 25.941333 21.845333 7.168 4.778667 17.066667 6.485333 28.672 6.485333 17.066667 0 31.744-5.802667 44.714667-18.090667l239.616-240.298667c12.288-12.288 17.749333-26.965333 17.749333-44.032S970.069333 597.674667 958.122667 584.362667L958.122667 584.362667 958.122667 584.362667zM958.122667 584.362667"  p-id="12937"></path></svg></a><a class="social" title="文档" href="/wiki" rel="noopener noreferrer"><svg t="1749545127371" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="14215" width="200" height="200"><path d="M128 256h96c19.2 0 32-12.8 32-32s-12.8-32-32-32h-96v-64c0-38.4 25.6-64 64-64h96c38.4 0 64 25.6 64 64v768c0 38.4-25.6 64-64 64h-96c-38.4 0-64-25.6-64-64V256z" fill="#707070" p-id="14216"></path><path d="M704 320h96c19.2 0 32-12.8 32-32s-12.8-32-32-32h-96V128c0-38.4 25.6-64 64-64h64c38.4 0 64 25.6 64 64v768c0 38.4-25.6 64-64 64h-64c-38.4 0-64-25.6-64-64V320z" fill="#707070" p-id="14217"></path><path d="M416 448h96c19.2 0 32-12.8 32-32s-12.8-32-32-32h-96V128c0-38.4 25.6-64 64-64h96c38.4 0 64 25.6 64 64v768c0 38.4-25.6 64-64 64h-96c-38.4 0-64-25.6-64-64V448z"  p-id="14218"></path></svg></a></div></footer>
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/php/">php</a> <span class="sep"></span> <a class="cap breadcrumb-link" href="/categories/php/hyperf/">hyperf</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2025-05-26T05:00:00.000Z">2025-05-26</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2025-06-07T09:52:09.894Z">2025-06-07</time></span></div><div class="flex-row"><span style="padding: 4px;">本文：1.7k字</span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>Hyperf 小笔记</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><h2 id="VSCode"><a href="#VSCode" class="headerlink" title="VSCode"></a>VSCode</h2><h3 id="VSCode格式化快捷键"><a href="#VSCode格式化快捷键" class="headerlink" title="VSCode格式化快捷键"></a>VSCode格式化快捷键</h3><p>Shift + Alt + F</p>
+<br/>
+
+<h3 id="强制折叠"><a href="#强制折叠" class="headerlink" title="强制折叠"></a>强制折叠</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//#regiont</span></span><br><span class="line"><span class="comment">//........</span></span><br><span class="line"><span class="comment">//#endregion</span></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<h2 id="Hyperf"><a href="#Hyperf" class="headerlink" title="Hyperf"></a>Hyperf</h2><br/>
+
+<h3 id="CORS跨域请求问题"><a href="#CORS跨域请求问题" class="headerlink" title="CORS跨域请求问题"></a>CORS跨域请求问题</h3><p>中间件添加</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span>(strict_types=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">Middleware</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">Context</span>\<span class="title">Context</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">HttpServer</span>\<span class="title">Contract</span>\<span class="title">RequestInterface</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Psr</span>\<span class="title">Container</span>\<span class="title">ContainerInterface</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Psr</span>\<span class="title">Http</span>\<span class="title">Message</span>\<span class="title">ResponseInterface</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Psr</span>\<span class="title">Http</span>\<span class="title">Server</span>\<span class="title">MiddlewareInterface</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Psr</span>\<span class="title">Http</span>\<span class="title">Message</span>\<span class="title">ServerRequestInterface</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Psr</span>\<span class="title">Http</span>\<span class="title">Server</span>\<span class="title">RequestHandlerInterface</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AuthMiddleware</span> <span class="keyword">implements</span> <span class="title">MiddlewareInterface</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$request</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="variable">$response</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="keyword">protected</span> ContainerInterface <span class="variable">$container</span>,RequestInterface <span class="variable">$request</span>,\Hyperf\HttpServer\Contract\ResponseInterface <span class="variable">$response</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;request = <span class="variable">$request</span>;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;response = <span class="variable">$response</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">process</span>(<span class="params">ServerRequestInterface <span class="variable">$request</span>, RequestHandlerInterface <span class="variable">$handler</span></span>): <span class="title">ResponseInterface</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 跨域问题，只允许 http://localhost:5173 源通过</span></span><br><span class="line">        <span class="variable">$response</span> = <span class="title class_">Context</span>::<span class="title function_ invoke__">get</span>(<span class="title class_">ResponseInterface</span>::<span class="variable language_">class</span>);</span><br><span class="line">        <span class="variable">$response</span> = <span class="variable">$response</span>-&gt;<span class="title function_ invoke__">withHeader</span>(<span class="string">&#x27;Access-Control-Allow-Origin&#x27;</span>, <span class="string">&#x27;http://localhost:5173&#x27;</span>)</span><br><span class="line">            -&gt;<span class="title function_ invoke__">withHeader</span>(<span class="string">&#x27;Access-Control-Allow-Credentials&#x27;</span>, <span class="string">&#x27;true&#x27;</span>)</span><br><span class="line">            -&gt;<span class="title function_ invoke__">withHeader</span>(<span class="string">&#x27;Access-Control-Allow-Headers&#x27;</span>, <span class="string">&#x27;DNT,Keep-Alive,User-Agent,Cache-Control,Content-Type,Authorization&#x27;</span>);</span><br><span class="line">        <span class="title class_">Context</span>::<span class="title function_ invoke__">set</span>(<span class="title class_">ResponseInterface</span>::<span class="variable language_">class</span>, <span class="variable">$response</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$request</span>-&gt;<span class="title function_ invoke__">getMethod</span>() == <span class="string">&#x27;OPTIONS&#x27;</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="variable">$response</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="title function_ invoke__">var_dump</span>(<span class="variable">$this</span>-&gt;request-&gt;<span class="title function_ invoke__">all</span>());</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$handler</span>-&gt;<span class="title function_ invoke__">handle</span>(<span class="variable">$request</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>原理了解：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1rp4y1K7nU/?spm_id_from=333.337.search-card.all.click&vd_source=a2d4c4a250ac1de22f16d959095bc5b9">https://www.bilibili.com/video/BV1rp4y1K7nU/?spm_id_from=333.337.search-card.all.click&amp;vd_source=a2d4c4a250ac1de22f16d959095bc5b9</a><br>掌握CORS跨域请求，看这个视频就够了【渡一教育】</p>
+<p>Access-Control-Allow-Origin：允许哪些源可以访问<br>Access-Control-Allow-Method：允许哪些请求方式<br>Access-Control-Allow-Headers：允许哪些请求头的添加和更改<br>Access-Control-Max-Age：允许多少秒内不用再重复发送预检请求，客户端会缓存本次响应</p>
+<br/>
+
+<br/>
+
+<h3 id="导入项目安装所需的依赖"><a href="#导入项目安装所需的依赖" class="headerlink" title="导入项目安装所需的依赖"></a>导入项目安装所需的依赖</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">composer install</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<h3 id="hyperf-改时区"><a href="#hyperf-改时区" class="headerlink" title="hyperf 改时区"></a>hyperf 改时区</h3><h4 id="hyperf-改时区-1"><a href="#hyperf-改时区-1" class="headerlink" title="hyperf 改时区"></a>hyperf 改时区</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">date_default_timezone_set</span>(<span class="string">&#x27;Asia/Shanghai&#x27;</span>);   <span class="comment">// bin/hyperf.php</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="docker容器中hyperf改时区"><a href="#docker容器中hyperf改时区" class="headerlink" title="docker容器中hyperf改时区"></a>docker容器中hyperf改时区</h4><p>Dockerfile 文件中修改配置</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ARG timezone</span><br><span class="line"></span><br><span class="line">ENV TIMEZONE=<span class="variable">$&#123;timezone:-&quot;UTC&quot;&#125;</span> \</span><br><span class="line">    APP_ENV=prod \</span><br><span class="line">    SCAN_CACHEABLE=(<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<h3 id="配置静态资源"><a href="#配置静态资源" class="headerlink" title="配置静态资源"></a>配置静态资源</h3><p>安装 <code>composer require hyperf/filesystem</code></p>
+<p>如果您希望通过 http 访问上传到本地的文件，请在 config&#x2F;autoload&#x2F;server.php 配置中增加以下配置。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> [</span><br><span class="line">    <span class="string">&#x27;settings&#x27;</span> =&gt; [</span><br><span class="line">        ...</span><br><span class="line">        <span class="comment">// 将 public 替换为上传目录</span></span><br><span class="line">        <span class="string">&#x27;document_root&#x27;</span> =&gt; BASE_PATH . <span class="string">&#x27;/public&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;enable_static_handler&#x27;</span> =&gt; <span class="literal">true</span>,</span><br><span class="line">    ],</span><br><span class="line">];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>在项目根目录下创建public文件夹：例如 &#x2F;public&#x2F;images&#x2F;1.png，访问url <a target="_blank" rel="noopener" href="http://127.0.0.1:9501/public/images/1.png">http://127.0.0.1:9501/public/images/1.png</a><br>该目录能正常解析html和js</p>
+<br/>
+
+<br/>
+
+<br/>
+
+<h3 id="生成文件命令"><a href="#生成文件命令" class="headerlink" title="生成文件命令"></a>生成文件命令</h3><p>hyperf 生成配置文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php bin/hyperf.php vendor:publish hyperf/session</span><br></pre></td></tr></table></figure>
+
+<p>用命令生成的配置信息默认用 .env 文件的配置</p>
+<br/>
+
+<p>生成中间件文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php bin/hyperf.php gen:middleware Auth/FooMiddleware</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<h3 id="记录"><a href="#记录" class="headerlink" title="记录"></a>记录</h3><p>1、hyperf是常驻内存的，每次修改了之后需要停止服务然后重启才能生效</p>
+<p>2、开发阶段，请不要设置 scan_cacheable 为 true</p>
+<p>3、composer analyse 可以检测代码在哪里有错误</p>
+<p>4、不能通过全局变量获取参数比如$_POST</p>
+<p>5、如果代码不生效，可以使用composer dump-autoload -o 之后在启动</p>
+<p>6、多个协程传递数据要用channel-&gt;push,channnl-&gt;pop</p>
+<p>7、server.php 里面如果设置了daemonize&#x3D;&gt;1，则会按照守护进程进行运行</p>
+<p>8、使用 <code>php bin/hyperf.php vendor:publish hyperf/&lt;组件名&gt;</code>，就可以在autoload里面直接&#x3D;&#x3D;生成相应的配置文件&#x3D;&#x3D;</p>
+<p>9、使用 @Inject 注解时需 use Hyperf\Di\Annotation\Inject</p>
+<p>10、可以使用make去实例化对象</p>
+<p>11、@Inject 覆盖顺序为子类覆盖 Trait 覆盖 父类</p>
+<p>12、<code>php bin/hyperf.php gen:middleware Auth/FooMiddleware</code> &#x3D;&#x3D;生成中间件文件&#x3D;&#x3D;  </p>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><h3 id="内存限制问题"><a href="#内存限制问题" class="headerlink" title="内存限制问题"></a>内存限制问题</h3><p>查看 php.ini 配置文件 或者 在命令行使用函数打印</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php -r <span class="string">&quot;var_dump(ini_get(&#x27;memory_limit&#x27;));&quot;</span></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<p>本脚本修改为无内存限制</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="title function_ invoke__">ini_set</span>(<span class="string">&#x27;memory_limit&#x27;</span>, <span class="string">&#x27;-1&#x27;</span>);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><br/>
+
+<h3 id="不能编辑文件问题"><a href="#不能编辑文件问题" class="headerlink" title="不能编辑文件问题"></a>不能编辑文件问题</h3><p>使用docker cp命令</p>
+<ol>
+<li>从容器中拷贝文件到宿主机：<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">cp</span> 容器ID或名称:/path/to/container/file /path/to/host/</span><br></pre></td></tr></table></figure></li>
+<li>在宿主机上使用熟悉的编辑器进行编辑。</li>
+<li>将编辑后的文件拷贝回容器：<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">cp</span> /path/to/host/file 容器ID或名称:/path/to/container/</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>docker cp D:&#x2F;docker&#x2F;my.cnf mysql8.0:&#x2F;etc</p>
+<br/>
+
+<br/>
+
+<h3 id="容器启动不了问题"><a href="#容器启动不了问题" class="headerlink" title="容器启动不了问题"></a>容器启动不了问题</h3><p>Docker 先到后启动的容器会依次按2~254分配</p>
+<br/>
+
+<p>遇到容器启动不了而端口没有被占用可以尝试重启或者重启WinNAT服务</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">net stop winnat    <span class="comment">## 停止WinNAT服务</span></span><br><span class="line">net start winnat   <span class="comment">## 重新启动WinNAT服务</span></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="修改已启动容器的配置"><a href="#修改已启动容器的配置" class="headerlink" title="修改已启动容器的配置"></a>修改已启动容器的配置</h3><p>如果已经映射了文件，删除容器 文件不会丢失，重新添加端口并映射文件然后运行容器就可以</p>
+<br/>
+
+<ul>
+<li>容器配置文件位置</li>
+</ul>
+<p>docker 容器目录： 进入 \\wsl$ 目录 ，直接搜索 containers 目录<br><code>\\wsl.localhost\docker-desktop\tmp\docker-desktop-root\var\lib\docker\containers</code></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/hyperf%E5%B0%8F%E7%AC%94%E8%AE%B0/39f83d9b0f605357e70dd2763f55d74a.png" alt="截图"></p>
+<br/>
+
+<br/>
+
+<h4 id="添加端口映射的方法"><a href="#添加端口映射的方法" class="headerlink" title="添加端口映射的方法"></a>添加端口映射的方法</h4><p>打开后修改其中的 config.v2.json 和 hostconfig.json，config.v2.json有两处需要添加，只添加一处，还是会恢复原样：<br>位置1：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;ExposedPorts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;9501/tcp&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;9500/tcp&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+
+<p>位置2:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;Ports&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;9501/tcp&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;HostIp&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0.0.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;HostPort&quot;</span><span class="punctuation">:</span> <span class="string">&quot;9501&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;9500/tcp&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;HostIp&quot;</span><span class="punctuation">:</span> <span class="string">&quot;0.0.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;HostPort&quot;</span><span class="punctuation">:</span> <span class="string">&quot;9500&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<p>hostconfig.json：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;PortBindings&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="number">9501</span>/tcp<span class="string">&quot;: [</span></span><br><span class="line"><span class="string">    &#123;</span></span><br><span class="line"><span class="string">    &quot;</span>HostIp<span class="string">&quot;: &quot;</span><span class="string">&quot;,</span></span><br><span class="line"><span class="string">    &quot;</span>HostPort<span class="string">&quot;: &quot;</span><span class="number">9501</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  ],</span></span><br><span class="line"><span class="string">  &quot;</span><span class="number">9500</span>/tcp<span class="string">&quot;: [</span></span><br><span class="line"><span class="string">    &#123;</span></span><br><span class="line"><span class="string">    &quot;</span>HostIp<span class="string">&quot;: &quot;</span><span class="string">&quot;,</span></span><br><span class="line"><span class="string">    &quot;</span>HostPort<span class="string">&quot;: &quot;</span><span class="number">9500</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  ]</span></span><br><span class="line"><span class="string">&#125;,</span></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h4 id="添加目录映射的方法"><a href="#添加目录映射的方法" class="headerlink" title="添加目录映射的方法"></a>添加目录映射的方法</h4><p>修改容器的“config.v2.json”配置文件<br>在“MountPoints”数组，增加映射：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;MountPoints&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span><span class="attr">&quot;/root/code&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span><span class="attr">&quot;Source&quot;</span><span class="punctuation">:</span><span class="string">&quot;/run/desktop/mnt/host/d/code&quot;</span><span class="punctuation">,</span><span class="attr">&quot;Destination&quot;</span><span class="punctuation">:</span><span class="string">&quot;/root/code&quot;</span><span class="punctuation">,</span><span class="attr">&quot;RW&quot;</span><span class="punctuation">:</span><span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span><span class="attr">&quot;Name&quot;</span><span class="punctuation">:</span><span class="string">&quot;&quot;</span><span class="punctuation">,</span><span class="attr">&quot;Driver&quot;</span><span class="punctuation">:</span><span class="string">&quot;&quot;</span><span class="punctuation">,</span><span class="attr">&quot;Type&quot;</span><span class="punctuation">:</span><span class="string">&quot;bind&quot;</span><span class="punctuation">,</span><span class="attr">&quot;Propagation&quot;</span><span class="punctuation">:</span><span class="string">&quot;rprivate&quot;</span><span class="punctuation">,</span><span class="attr">&quot;Spec&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span><span class="attr">&quot;Type&quot;</span><span class="punctuation">:</span><span class="string">&quot;bind&quot;</span><span class="punctuation">,</span><span class="attr">&quot;Source&quot;</span><span class="punctuation">:</span><span class="string">&quot;/run/desktop/mnt/host/d/code&quot;</span><span class="punctuation">,</span><span class="attr">&quot;Target&quot;</span><span class="punctuation">:</span><span class="string">&quot;/root/code&quot;</span><span class="punctuation">&#125;</span><span class="punctuation">,</span><span class="attr">&quot;SkipMountpointCreation&quot;</span><span class="punctuation">:</span><span class="literal"><span class="keyword">false</span></span><span class="punctuation">&#125;</span><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<p>修改容器的“hostconfig.json”配置文件<br>在“Binds”数组，增加映射：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;Binds&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span><span class="string">&quot;/run/desktop/mnt/host/d/code:/root/code&quot;</span><span class="punctuation">]</span></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h2 id="PhpStorm"><a href="#PhpStorm" class="headerlink" title="PhpStorm"></a>PhpStorm</h2><h3 id="全局搜索"><a href="#全局搜索" class="headerlink" title="全局搜索"></a>全局搜索</h3><p>PhpStorm 全局搜索：** Ctrl + Shift + F**</p>
+<p>输入法冲突：如果按下快捷键没有反应，可能是因为输入法占用了该快捷键。特别是在 Windows 10 自带的中文输入法中，Ctrl + Shift + F 是简繁体转换的快捷键<br>切换输入法：尝试切换到英文输入法，然后再按 Ctrl + Shift + F</p>
+<p><strong>双击Shift</strong> 也能全局搜索</p>
+<br/>
+
+<br/>
+
+<br/>
+
+<h2 id="Typora"><a href="#Typora" class="headerlink" title="Typora"></a>Typora</h2><h3 id="Typora-不用注册机激活"><a href="#Typora-不用注册机激活" class="headerlink" title="Typora 不用注册机激活"></a>Typora 不用注册机激活</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45320660/article/details/135482861">https://blog.csdn.net/weixin_45320660/article/details/135482861</a></p>
+<br/>
+
+<br/>
+
+<p>按照 Typora路径到 —&gt; resources —&gt; page-dist —&gt; static —&gt; js 这个路径找到一个或多个文件<br>LicenseIndex.180dd4c7.xxxxxxx.chunk.js</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hasActivated=<span class="string">&quot;true&quot;</span>==e.hasActivated  <span class="comment">## 替换为  </span></span><br><span class="line">hasActivated=<span class="string">&quot;true&quot;</span>==<span class="string">&quot;true&quot;</span></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h2 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h2><h4 id="sql严格模式"><a href="#sql严格模式" class="headerlink" title="sql严格模式"></a>sql严格模式</h4><br/>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// sql语句报错：1055 - Expression。</span><br><span class="line">// mysql5.7以上默认严格模式：ONLY_FULL_GROUP_BY：要求<span class="keyword">select</span>语句中所查询出的列必须是在group by中进行声明，否则就会报错。</span><br><span class="line">// 也就是值需要是来自于聚合函数（<span class="built_in">sum</span>、avg、max等）的结果</span><br><span class="line">// 1、SET SESSION sql_mode=(SELECT REPLACE(@@sql_mode,<span class="string">&#x27;ONLY_FULL_GROUP_BY&#x27;</span>,<span class="string">&#x27;&#x27;</span>));  本次会话有效</span><br><span class="line">// 2、mysql配置文件中添加配置：lunix：mysql --<span class="built_in">help</span> | grep cnf（查看文件位置），不再文件末尾添加sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION</span><br><span class="line">// 3、Windows 直接在mysql目录下创建my.ini，在[mysqld]部分下添加添加sql_mode=NO_ENGINE_SUBSTITUTION，其他配置信息网上找</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><br><br></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/blbl.png" alt="截图"></p>
+<br>
+
+
+
+</article>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2025/05/26/Hyperf%20%E5%BF%AB%E9%80%9F%E5%AD%A6%E4%B9%A0/">Hyperf 快速学习</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2025/05/26/hyperf/">Hyperf</a></div></section></div>
+
+
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="text"><p>本站由 <a href="/">ShanMoYu</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1">Stellar 1.29.1</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+<widget class="widget-wrapper ghrepo"><div class="widget-body"><div class="items ds-ghinfo" api="https://api.github.com/repos/hyperf/hyperf"><a class="repo" href="https://github.com/hyperf/hyperf" target="_blank" rel="external nofollow noopener noreferrer"><div class="repo-name flex-row"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"></path></svg>hyperf/hyperf</div><div class="repo-desc"><span type="text" id="description">&nbsp;</span></div><div class="grid"><div class="flex-row"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.564.41l-3.097.45 2.24 2.184a.75.75 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01.698 0l2.77 1.456-.53-3.084a.75.75 0 01.216-.664l2.24-2.183-3.096-.45a.75.75 0 01-.564-.41L8 2.694v.001z"></path></svg><span type="text" id="stargazers_count"></span></div><div class="flex-row"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path></svg><span type="text" id="forks_count"></span></div><div class="flex-row ds-ghinfo" index="0" api="https://api.github.com/repos/hyperf/hyperf/tags"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z"></path></svg><span type="text" id="latest-tag-name">0</span></div></div></a></div></div></widget>
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#VSCode"><span class="toc-text">VSCode</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#VSCode%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-text">VSCode格式化快捷键</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%BA%E5%88%B6%E6%8A%98%E5%8F%A0"><span class="toc-text">强制折叠</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hyperf"><span class="toc-text">Hyperf</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CORS%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82%E9%97%AE%E9%A2%98"><span class="toc-text">CORS跨域请求问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5%E9%A1%B9%E7%9B%AE%E5%AE%89%E8%A3%85%E6%89%80%E9%9C%80%E7%9A%84%E4%BE%9D%E8%B5%96"><span class="toc-text">导入项目安装所需的依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hyperf-%E6%94%B9%E6%97%B6%E5%8C%BA"><span class="toc-text">hyperf 改时区</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#hyperf-%E6%94%B9%E6%97%B6%E5%8C%BA-1"><span class="toc-text">hyperf 改时区</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#docker%E5%AE%B9%E5%99%A8%E4%B8%ADhyperf%E6%94%B9%E6%97%B6%E5%8C%BA"><span class="toc-text">docker容器中hyperf改时区</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90"><span class="toc-text">配置静态资源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E6%96%87%E4%BB%B6%E5%91%BD%E4%BB%A4"><span class="toc-text">生成文件命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%B0%E5%BD%95"><span class="toc-text">记录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP"><span class="toc-text">PHP</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E9%99%90%E5%88%B6%E9%97%AE%E9%A2%98"><span class="toc-text">内存限制问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker"><span class="toc-text">Docker</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8D%E8%83%BD%E7%BC%96%E8%BE%91%E6%96%87%E4%BB%B6%E9%97%AE%E9%A2%98"><span class="toc-text">不能编辑文件问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E5%90%AF%E5%8A%A8%E4%B8%8D%E4%BA%86%E9%97%AE%E9%A2%98"><span class="toc-text">容器启动不了问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E5%B7%B2%E5%90%AF%E5%8A%A8%E5%AE%B9%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-text">修改已启动容器的配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">添加端口映射的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E7%9B%AE%E5%BD%95%E6%98%A0%E5%B0%84%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">添加目录映射的方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PhpStorm"><span class="toc-text">PhpStorm</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E6%90%9C%E7%B4%A2"><span class="toc-text">全局搜索</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Typora"><span class="toc-text">Typora</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Typora-%E4%B8%8D%E7%94%A8%E6%B3%A8%E5%86%8C%E6%9C%BA%E6%BF%80%E6%B4%BB"><span class="toc-text">Typora 不用注册机激活</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mysql"><span class="toc-text">mysql</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#sql%E4%B8%A5%E6%A0%BC%E6%A8%A1%E5%BC%8F"><span class="toc-text">sql严格模式</span></a></li></ol></li></ol></li></ol></div><div class="widget-footer">
+
+<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a></div></widget>
+</div></aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js`,
+    marked: `https://cdn.jsdelivr.net/npm/marked@13.0.1/lib/marked.umd.min.js`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+    
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
+
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+
+<!-- required -->
+<script src="/js/main.js?v=1.29.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    applyThemeToGiscus(theme)
+  }
+
+  const applyThemeToGiscus = (theme) => {
+    theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    }
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>

@@ -1,0 +1,1033 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1" theme-name="Stellar" theme-version="1.29.1">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  
+  <title>Hyperf 日志服务前置学习 - (゜-゜)つロ 干杯 d===(￣▽￣*)b</title>
+
+  
+    <meta name="description" content="JSON RPC 服务JSON RPC 是一种基于 JSON 格式的轻量级的 RPC 协议标准，易于使用和阅读。在 Hyperf 里由 hyperf&#x2F;json-rpc 组件来实现，可自定义基于 HTTP 协议来传输，或直接基于 TCP 协议来传输。通过rpc协议，可以让调用本地函数一样调用远端的函数。 安装    该组件只是 JSON RPC 的协议处理的组件，通常来说，您仍需配合 hy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hyperf 日志服务前置学习">
+<meta property="og:url" content="http://example.com/2025/05/29/Hyperf%20%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="(゜-゜)つロ 干杯 d&#x3D;&#x3D;&#x3D;(￣▽￣*)b">
+<meta property="og:description" content="JSON RPC 服务JSON RPC 是一种基于 JSON 格式的轻量级的 RPC 协议标准，易于使用和阅读。在 Hyperf 里由 hyperf&#x2F;json-rpc 组件来实现，可自定义基于 HTTP 协议来传输，或直接基于 TCP 协议来传输。通过rpc协议，可以让调用本地函数一样调用远端的函数。 安装    该组件只是 JSON RPC 的协议处理的组件，通常来说，您仍需配合 hy">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/fcc96671a341e327a6d363cbd6baffb7.png">
+<meta property="og:image" content="http://example.com/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/e620e064672ab38b02da98df4d38faae.png">
+<meta property="og:image" content="http://example.com/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/309d141127380bb4bacbb7364d781a5d.png">
+<meta property="og:image" content="http://example.com/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/c2b05ada664afb089a1265d68d092999.png">
+<meta property="og:image" content="http://example.com/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/5581b58cd3ba47772900af630ea8c544.png">
+<meta property="og:image" content="http://example.com/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/de8f74b9c4a7bf7d24a1509f6ae4bc2b.png">
+<meta property="og:image" content="http://example.com/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/227383b52f0d93bdb018502564b65f04.png">
+<meta property="og:image" content="http://example.com/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/fd44c1eb1c33a67d35ddd1f322bfc832.png">
+<meta property="og:image" content="http://example.com/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/60d1f5f915a653a869c97e452ed41bba.png">
+<meta property="og:image" content="http://example.com/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/f1c0c220227a0a033d0d5f29269cb59d.png">
+<meta property="og:image" content="http://example.com/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/f5288e958f4ae44e98aad46ee4cf921f.png">
+<meta property="og:image" content="http://example.com/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/6f1ed1b07e17014a3b97684a04c7b681.png">
+<meta property="og:image" content="http://example.com/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/b0052cb1e738ca82cec237afc960ab17.png">
+<meta property="og:image" content="http://example.com/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/088c0be3d16d5f6ea06841618d40b5a1.png">
+<meta property="og:image" content="http://example.com/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/2cfd24368c9d922375ac61b7146bd3bd.png">
+<meta property="og:image" content="http://example.com/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/23cab07aa2cbe1ac1062df02f062c660.png">
+<meta property="og:image" content="http://example.com/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/6ff63c6dffabd5f5cd34ced03571aefc.png">
+<meta property="og:image" content="http://example.com/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/a9c878a0c71c89332c3024b810c9cb32.png">
+<meta property="og:image" content="http://example.com/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/ab5eada2408543de1ea65d702ee46dfb.png">
+<meta property="og:image" content="http://example.com/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/19f6644317e9b6be73977fe3979db45f.png">
+<meta property="article:published_time" content="2025-05-29T05:00:00.000Z">
+<meta property="article:modified_time" content="2025-06-06T06:57:07.449Z">
+<meta property="article:author" content="ShanMoYu">
+<meta property="article:tag" content="php">
+<meta property="article:tag" content="hyperf">
+<meta property="article:tag" content="微服务">
+<meta property="article:tag" content="nacos">
+<meta property="article:tag" content="Redis">
+<meta property="article:tag" content="Elasticsearch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/fcc96671a341e327a6d363cbd6baffb7.png">
+  
+  
+  
+  <meta name="keywords" content="php,hyperf,微服务,nacos,Redis,Elasticsearch">
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.29.1">
+
+  
+    <link rel="shortcut icon" href="/images/clash.svg">
+  
+
+  
+
+  <link rel="stylesheet" href="https://cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.6.0/lxgwwenkaiscreen.css"><link rel="stylesheet" href="/my.css"><script src="/my.js"></script>
+</head>
+<body>
+
+<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/头像.webp" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">ShanMoYu</div><div class="sub normal cap">不知道写什么就先占着</div><div class="sub hover cap" style="opacity:0"> Designed by SMY</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<nav class="menu dis-select"><a class="nav-item active" title="博客" href="/" style="color:#1BCDFC"><span>博客</span></a><a class="nav-item" title="文档" href="/wiki/" style="color:#3DC550"><span>文档</span></a><a class="nav-item" title="社交" href="/friends/" style="color:#F44336"><span>社交</span></a></nav>
+</div>
+<div class="widgets">
+
+
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/2025/05/26/hyperf/"><span class="title">Hyperf</span></a><a class="item title" href="/2025/05/26/hyperf%20%E5%B0%8F%E7%AC%94%E8%AE%B0/"><span class="title">Hyperf 小笔记</span></a><a class="item title" href="/2025/06/04/kratos%20%E5%AD%A6%E4%B9%A0/"><span class="title">kratos 学习</span></a><a class="item title" href="/2025/06/04/kratos%20%E5%B0%8F%E7%AC%94%E8%AE%B0/"><span class="title">kratos 小笔记</span></a><a class="item title" href="/2025/05/26/Hyperf%20%E5%BF%AB%E9%80%9F%E5%AD%A6%E4%B9%A0/"><span class="title">Hyperf 快速学习</span></a><a class="item title" href="/2025/05/29/Hyperf%20%E5%85%B6%E4%BB%96%E7%BB%84%E4%BB%B6/"><span class="title">Hyperf 其他组件</span></a><a class="item title" href="/2025/05/29/Hyperf%20%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/"><span class="title">Hyperf 日志服务前置学习</span></a><a class="item title" href="/2025/06/04/kratos%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87%E5%92%8C%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85/"><span class="title">kratos环境准备和工具安装</span></a><a class="item title" href="/2025/05/22/hello-world/"><span class="title">Hello World</span></a></div></widget>
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" title="Github" href="/" rel="noopener noreferrer"><svg t="1749544483694" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3318" width="200" height="200"><path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9 23.5 23.2 38.1 55.4 38.1 91v112.5c0.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z" p-id="3319"></path></svg></a><a class="social" title="Steam" href="/" rel="noopener noreferrer"><svg t="1749544605406" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4332" width="200" height="200"><path d="M904 332.571429q0 57.714286-40.857143 98.571429t-98.571429 40.857143-98.571429-40.857143-40.857143-98.571429 40.857143-98.571429 98.571429-40.857143 98.571429 40.857143 40.857143 98.571429zm-440 424q0-59.428571-41.714286-101.142857t-101.142857-41.714286q-15.428571 0-30.857143 3.428571l59.428571 24q44 17.714286 62.571429 60.857143t0.857143 86.571429q-17.714286 44-61.142857 62.285714t-86.857143 0.571429q-12-4.571429-35.428571-14t-34.857143-14q18.285714 34.285714 52 55.142857t74.285714 20.857143q59.428571 0 101.142857-41.714286t41.714286-101.142857zm474.285714-423.428571q0-72-51.142857-123.142857t-123.142857-51.142857q-72.571429 0-123.714286 51.142857t-51.142857 123.142857q0 72.571429 51.142857 123.428571t123.714286 50.857143q72 0 123.142857-50.857143t51.142857-123.428571zm85.714286 0q0 108-76.285714 184t-183.714286 76l-249.714286 182.285714q-6.857143 73.714286-62.285714 124.571429t-130.857143 50.857143q-69.142857 0-122.285714-43.428571t-67.428571-109.714286l-131.428571-52.571429 0-245.142857 222.285714 89.714286q45.142857-27.428571 98.857143-27.428571 7.428571 0 20 1.142857l162.285714-232.571429q1.142857-106.857143 77.428571-182.285714t183.142857-75.428571q107.428571 0 183.714286 76.285714t76.285714 183.714286z" p-id="4333"></path></svg></a><a class="social" title="bilibili" href="/" rel="noopener noreferrer"><svg t="1749544944631" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="11834" width="200" height="200"><path d="M777.514667 131.669333a53.333333 53.333333 0 0 1 0 75.434667L728.746667 255.829333h49.92A160 160 0 0 1 938.666667 415.872v320a160 160 0 0 1-160 160H245.333333A160 160 0 0 1 85.333333 735.872v-320a160 160 0 0 1 160-160h49.749334L246.4 207.146667a53.333333 53.333333 0 0 1 75.392-75.434667l113.152 113.152c3.370667 3.370667 6.186667 7.04 8.448 10.965333h137.088c2.261333-3.925333 5.12-7.68 8.490667-11.008l113.109333-113.152a53.333333 53.333333 0 0 1 75.434667 0z m1.152 231.253334H245.333333a53.333333 53.333333 0 0 0-53.205333 49.365333l-0.128 4.010667v320c0 28.117333 21.76 51.114667 49.365333 53.162666l3.968 0.170667h533.333334a53.333333 53.333333 0 0 0 53.205333-49.365333l0.128-3.968v-320c0-29.44-23.893333-53.333333-53.333333-53.333334z m-426.666667 106.666666c29.44 0 53.333333 23.893333 53.333333 53.333334v53.333333a53.333333 53.333333 0 1 1-106.666666 0v-53.333333c0-29.44 23.893333-53.333333 53.333333-53.333334z m320 0c29.44 0 53.333333 23.893333 53.333333 53.333334v53.333333a53.333333 53.333333 0 1 1-106.666666 0v-53.333333c0-29.44 23.893333-53.333333 53.333333-53.333334z" p-id="11835" ></path></svg></a><a class="social" title="Tag" href="/tags" rel="noopener noreferrer"><svg t="1749545003744" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="12936" width="200" height="200"><path d="M788.48 629.418667c0-17.066667-5.802667-31.744-17.749333-44.714667L421.205333 235.861333c-12.288-12.288-29.354667-22.869333-49.834667-31.744-21.162667-8.874667-39.936-12.970667-57.002667-12.970667L110.933333 191.146667c-17.066667 0-31.744 6.485333-44.032 18.773333-12.288 12.288-18.773333 26.965333-18.773333 44.032l0 202.752c0 17.066667 4.096 36.522667 12.970667 57.002667 8.874667 21.162667 18.773333 37.546667 31.744 49.834667l349.525333 349.525333c12.288 12.288 26.965333 17.749333 44.032 17.749333 17.066667 0 31.744-5.802667 44.714667-17.749333l239.616-239.616C781.994667 661.162667 788.48 646.485333 788.48 629.418667L788.48 629.418667 788.48 629.418667zM248.490667 392.192c-12.288 12.288-26.965333 18.090667-44.032 18.090667-17.066667 0-31.744-5.802667-44.032-18.090667-12.288-12.288-18.090667-26.965333-18.090667-44.032 0-17.066667 5.802667-31.744 18.090667-44.032 12.288-12.288 26.965333-18.090667 44.032-18.090667 17.066667 0 31.744 5.802667 44.032 18.090667C260.778667 316.416 266.24 331.093333 266.24 348.16 267.264 365.568 260.778667 379.904 248.490667 392.192L248.490667 392.192 248.490667 392.192zM958.122667 584.362667 608.597333 235.861333c-12.288-12.288-29.354667-22.869333-49.834667-31.744C537.6 195.242667 518.826667 191.146667 501.76 191.146667l-109.909333 0c17.066667 0 36.522667 4.096 57.002667 12.970667 21.162667 8.874667 37.546667 18.773333 49.834667 31.744l349.525333 348.501333c12.288 12.970667 18.090667 27.648 18.090667 44.714667s-5.802667 31.744-18.090667 44.032l-229.034667 229.717333c9.898667 9.898667 18.773333 17.066667 25.941333 21.845333 7.168 4.778667 17.066667 6.485333 28.672 6.485333 17.066667 0 31.744-5.802667 44.714667-18.090667l239.616-240.298667c12.288-12.288 17.749333-26.965333 17.749333-44.032S970.069333 597.674667 958.122667 584.362667L958.122667 584.362667 958.122667 584.362667zM958.122667 584.362667"  p-id="12937"></path></svg></a><a class="social" title="文档" href="/wiki" rel="noopener noreferrer"><svg t="1749545127371" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="14215" width="200" height="200"><path d="M128 256h96c19.2 0 32-12.8 32-32s-12.8-32-32-32h-96v-64c0-38.4 25.6-64 64-64h96c38.4 0 64 25.6 64 64v768c0 38.4-25.6 64-64 64h-96c-38.4 0-64-25.6-64-64V256z" fill="#707070" p-id="14216"></path><path d="M704 320h96c19.2 0 32-12.8 32-32s-12.8-32-32-32h-96V128c0-38.4 25.6-64 64-64h64c38.4 0 64 25.6 64 64v768c0 38.4-25.6 64-64 64h-64c-38.4 0-64-25.6-64-64V320z" fill="#707070" p-id="14217"></path><path d="M416 448h96c19.2 0 32-12.8 32-32s-12.8-32-32-32h-96V128c0-38.4 25.6-64 64-64h96c38.4 0 64 25.6 64 64v768c0 38.4-25.6 64-64 64h-96c-38.4 0-64-25.6-64-64V448z"  p-id="14218"></path></svg></a></div></footer>
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top"><img class="bg lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://i0.hdslb.com/bfs/openplatform/bd94766e9017f28374eb60f130be6d423b889111.png">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/php/">php</a> <span class="sep"></span> <a class="cap breadcrumb-link" href="/categories/php/hyperf/">hyperf</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2025-05-29T05:00:00.000Z">2025-05-29</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2025-06-06T06:57:07.449Z">2025-06-06</time></span></div><div class="flex-row"><span style="padding: 4px;">本文：5k字</span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>Hyperf 日志服务前置学习</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><h2 id="JSON-RPC-服务"><a href="#JSON-RPC-服务" class="headerlink" title="JSON RPC 服务"></a>JSON RPC 服务</h2><p>JSON RPC 是一种基于 JSON 格式的轻量级的 RPC 协议标准，易于使用和阅读。在 Hyperf 里由 hyperf&#x2F;json-rpc 组件来实现，可自定义基于 HTTP 协议来传输，或直接基于 TCP 协议来传输。通过rpc协议，可以让调用本地函数一样调用远端的函数。</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><div class="tag-plugin copy"><input class="copy-area" id="copy_26" value="composer require hyperf/json-rpc"><button class="copy-btn" onclick="util.copy(&quot;copy_26&quot;,&quot;复制成功&quot;)"><svg class="icon copy-btn" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"></path></svg></button></div>
+
+
+
+<p>该组件只是 JSON RPC 的协议处理的组件，通常来说，您仍需配合 hyperf&#x2F;rpc-server 或 hyperf&#x2F;rpc-client 来满足 服务端 和 客户端的场景，如同时使用则都需要安装：</p>
+<p>要使用 JSON RPC 服务端：</p>
+<div class="tag-plugin copy"><input class="copy-area" id="copy_27" value="composer require hyperf/rpc-server"><button class="copy-btn" onclick="util.copy(&quot;copy_27&quot;,&quot;复制成功&quot;)"><svg class="icon copy-btn" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"></path></svg></button></div>
+
+
+
+<p>要使用 JSON RPC 客户端：</p>
+<div class="tag-plugin copy"><input class="copy-area" id="copy_28" value="composer require hyperf/rpc-client"><button class="copy-btn" onclick="util.copy(&quot;copy_28&quot;,&quot;复制成功&quot;)"><svg class="icon copy-btn" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"></path></svg></button></div>
+
+
+
+<br/>
+
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>服务有两种角色，一种是 服务提供者(ServiceProvider)，即为其它服务提供服务的服务，另一种是 服务消费者(ServiceConsumer)，即依赖其它服务的服务，一个服务既可能是 服务提供者(ServiceProvider)，同时又是 服务消费者(ServiceConsumer)。而两者直接可以通过 服务契约 来定义和约束接口的调用，在 Hyperf 里，可直接理解为就是一个 接口类(Interface)，通常来说这个接口类会同时出现在提供者和消费者下。</p>
+<h4 id="定义服务提供者"><a href="#定义服务提供者" class="headerlink" title="定义服务提供者"></a>定义服务提供者</h4><p>目前仅支持通过注解的形式来定义 服务提供者(ServiceProvider)，后续迭代会增加配置的形式。<br>我们可以直接通过 <code>#[RpcService]</code> 注解对一个类进行定义即可发布这个服务了：</p>
+<p>在 App\JsonRpc 下创建接口 CalculatorServiceInterface.php</p>
+<figure class="highlight php"><figcaption><span>app/JsonRpc/CalculatorServiceInterface.php</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">JsonRpc</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">CalculatorServiceInterface</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"><span class="keyword">int</span> <span class="variable">$a</span>, <span class="keyword">int</span> <span class="variable">$b</span></span>)</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<p>写方法</p>
+<figure class="highlight php"><figcaption><span>app/JsonRpc/CalculatorService.php</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">JsonRpc</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">RpcServer</span>\<span class="title">Annotation</span>\<span class="title">RpcService</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 注意，如希望通过服务中心来管理服务，需在注解内增加 publishTo 属性</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">#[RpcService</span>(<span class="attr">name</span>: <span class="string">&quot;CalculatorService&quot;</span>, <span class="attr">protocol</span>: <span class="string">&quot;jsonrpc&quot;</span>, <span class="attr">server</span>: <span class="string">&quot;jsonrpc&quot;</span>,<span class="attr">publishTo</span>: <span class="string">&quot;nacos&quot;</span>)<span class="meta">]</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CalculatorService</span> <span class="keyword">implements</span> <span class="title">CalculatorServiceInterface</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">// 实现一个加法方法，这里简单的认为参数都是 int 类型</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"><span class="keyword">int</span> <span class="variable">$a</span>, <span class="keyword">int</span> <span class="variable">$b</span></span>): <span class="title">int</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 这里是服务方法的具体实现</span></span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$a</span> + <span class="variable">$b</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<h5 id="定义-JSON-RPC-Server"><a href="#定义-JSON-RPC-Server" class="headerlink" title="定义 JSON RPC Server"></a>定义 JSON RPC Server</h5><p>在 config&#x2F;autoload&#x2F;server.php 配置文件中添加适配 jsonrpc 协议</p>
+<p>TCP Server (适配 jsonrpc 协议)</p>
+<figure class="highlight php"><figcaption><span>config/autoload/server.php</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">Server</span>\<span class="title">Server</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">Server</span>\<span class="title">Event</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> [</span><br><span class="line">    <span class="string">&#x27;mode&#x27;</span> =&gt; SWOOLE_PROCESS,</span><br><span class="line">    <span class="string">&#x27;servers&#x27;</span> =&gt; [</span><br><span class="line">        [</span><br><span class="line">            ......</span><br><span class="line">        ],</span><br><span class="line">        [</span><br><span class="line">            <span class="string">&#x27;name&#x27;</span> =&gt; <span class="string">&#x27;jsonrpc&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;type&#x27;</span> =&gt; <span class="title class_">Server</span>::<span class="variable constant_">SERVER_BASE</span>,</span><br><span class="line">            <span class="string">&#x27;host&#x27;</span> =&gt; <span class="string">&#x27;0.0.0.0&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;port&#x27;</span> =&gt; <span class="number">9503</span>,</span><br><span class="line">            <span class="string">&#x27;sock_type&#x27;</span> =&gt; SWOOLE_SOCK_TCP,</span><br><span class="line">            <span class="string">&#x27;callbacks&#x27;</span> =&gt; [</span><br><span class="line">                <span class="title class_">Event</span>::<span class="variable constant_">ON_RECEIVE</span> =&gt; [<span class="title class_">\Hyperf\JsonRpc\TcpServer</span>::<span class="variable language_">class</span>, <span class="string">&#x27;onReceive&#x27;</span>],</span><br><span class="line">            ],</span><br><span class="line">            <span class="string">&#x27;settings&#x27;</span> =&gt; [</span><br><span class="line">                <span class="string">&#x27;open_eof_split&#x27;</span> =&gt; <span class="literal">true</span>,</span><br><span class="line">                <span class="string">&#x27;package_eof&#x27;</span> =&gt; <span class="string">&quot;\r\n&quot;</span>,</span><br><span class="line">                <span class="string">&#x27;package_max_length&#x27;</span> =&gt; <span class="number">1024</span> * <span class="number">1024</span> * <span class="number">2</span>,</span><br><span class="line">            ],</span><br><span class="line">        ],</span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">        </span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&#x27;settings&#x27;</span> =&gt; [</span><br><span class="line">        ......</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&#x27;callbacks&#x27;</span> =&gt; [</span><br><span class="line">        ......</span><br><span class="line">    ],</span><br><span class="line">];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h3 id="发布到服务中心"><a href="#发布到服务中心" class="headerlink" title="发布到服务中心"></a>发布到服务中心</h3><p>发布服务到 nacos 需要通过 <code>composer require hyperf/service-governance-nacos</code> 引用组件（如果已安装则可忽略该步骤），然后再在 config&#x2F;autoload&#x2F;services.php 配置文件内配置 <code>drivers.nacos</code> 配置即可，示例如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">return</span> [</span><br><span class="line">    <span class="string">&#x27;enable&#x27;</span> =&gt; [</span><br><span class="line">        <span class="string">&#x27;discovery&#x27;</span> =&gt; <span class="literal">true</span>,</span><br><span class="line">        <span class="string">&#x27;register&#x27;</span> =&gt; <span class="literal">true</span>,</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&#x27;consumers&#x27;</span> =&gt; [],</span><br><span class="line">    <span class="string">&#x27;providers&#x27;</span> =&gt; [],</span><br><span class="line">    <span class="string">&#x27;drivers&#x27;</span> =&gt; [</span><br><span class="line"><span class="comment">//        &#x27;consul&#x27; =&gt; [</span></span><br><span class="line"><span class="comment">//            &#x27;uri&#x27; =&gt; &#x27;http://127.0.0.1:8500&#x27;,</span></span><br><span class="line"><span class="comment">//            &#x27;token&#x27; =&gt; &#x27;&#x27;,</span></span><br><span class="line"><span class="comment">//        ],</span></span><br><span class="line">        <span class="string">&#x27;nacos&#x27;</span> =&gt; [</span><br><span class="line">            <span class="comment">// nacos server url like https://nacos.hyperf.io, Priority is higher than host:port</span></span><br><span class="line">            <span class="comment">// &#x27;url&#x27; =&gt; &#x27;&#x27;,</span></span><br><span class="line">            <span class="comment">// The nacos host info</span></span><br><span class="line">            <span class="string">&#x27;host&#x27;</span> =&gt; <span class="string">&#x27;host.docker.internal&#x27;</span> ,</span><br><span class="line">            <span class="string">&#x27;port&#x27;</span> =&gt; <span class="number">8848</span>,</span><br><span class="line">            <span class="comment">// The nacos account info</span></span><br><span class="line">            <span class="string">&#x27;username&#x27;</span> =&gt; <span class="literal">null</span>,</span><br><span class="line">            <span class="string">&#x27;password&#x27;</span> =&gt; <span class="literal">null</span>,</span><br><span class="line"><span class="comment">//            &#x27;guzzle&#x27; =&gt; [</span></span><br><span class="line"><span class="comment">//                &#x27;config&#x27; =&gt; null,</span></span><br><span class="line"><span class="comment">//            ],</span></span><br><span class="line"><span class="comment">//            &#x27;group_name&#x27; =&gt; &#x27;api&#x27;,</span></span><br><span class="line"><span class="comment">//            &#x27;namespace_id&#x27; =&gt; &#x27;namespace_id&#x27;,</span></span><br><span class="line">            <span class="string">&#x27;heartbeat&#x27;</span> =&gt; <span class="number">5</span>,</span><br><span class="line">        ],</span><br><span class="line">    ],</span><br><span class="line">];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>配置完成后，在启动服务时，Hyperf 会自动地将 #[RpcService] 定义了 publishTo 属性为 consul 或 nacos 的服务注册到对应的服务中心去。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/fcc96671a341e327a6d363cbd6baffb7.png" alt="截图"></p>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h3 id="创建消费端项目"><a href="#创建消费端项目" class="headerlink" title="创建消费端项目"></a>创建消费端项目</h3><p>可以看文档服务注册<br><a target="_blank" rel="noopener" href="https://hyperf.wiki/3.1/#/zh-cn/service-register?id=%e5%ae%89%e8%a3%85">https://hyperf.wiki/3.1/#/zh-cn/service-register?id=%e5%ae%89%e8%a3%85</a></p>
+<br/>
+
+<p>安装需要的组件</p>
+<div class="tag-plugin copy"><input class="copy-area" id="copy_29" value="composer require hyperf/json-rpc"><button class="copy-btn" onclick="util.copy(&quot;copy_29&quot;,&quot;复制成功&quot;)"><svg class="icon copy-btn" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"></path></svg></button></div>
+
+
+
+<p>JSON RPC 客户端：</p>
+<div class="tag-plugin copy"><input class="copy-area" id="copy_30" value="composer require hyperf/rpc-client"><button class="copy-btn" onclick="util.copy(&quot;copy_30&quot;,&quot;复制成功&quot;)"><svg class="icon copy-btn" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"></path></svg></button></div>
+
+<br/>
+
+
+
+<p>在 app&#x2F;JsonRpc 目录下创建接口</p>
+<figure class="highlight php"><figcaption><span>app/JsonRpc/CalculatorServiceInterface</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">JsonRpc</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">CalculatorServiceInterface</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"><span class="keyword">int</span> <span class="variable">$a</span>, <span class="keyword">int</span> <span class="variable">$b</span></span>)</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h4 id="自动创建代理消费者类"><a href="#自动创建代理消费者类" class="headerlink" title="自动创建代理消费者类"></a>自动创建代理消费者类</h4><br/>
+
+<p>通过配置文件就可以连接nacos服务中心去使用远程的函数&#x2F;方法<br>安装组件 <code>composer require hyperf/service-governance-nacos</code> ，创建 config&#x2F;autoload&#x2F;services.php 配置相关信息</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">return</span> [</span><br><span class="line">    <span class="comment">// 此处省略了其它同层级的配置</span></span><br><span class="line">    <span class="string">&#x27;consumers&#x27;</span> =&gt; [</span><br><span class="line">        [</span><br><span class="line">            <span class="comment">// name 需与服务提供者的 name 属性相同</span></span><br><span class="line">            <span class="string">&#x27;name&#x27;</span> =&gt; <span class="string">&#x27;CalculatorService&#x27;</span>,</span><br><span class="line">            <span class="comment">// 服务接口名，可选，默认值等于 name 配置的值，如果 name 直接定义为接口类则可忽略此行配置，如 name 为字符串则需要配置 service 对应到接口类</span></span><br><span class="line">            <span class="string">&#x27;service&#x27;</span> =&gt; <span class="title class_">\App\JsonRpc\CalculatorServiceInterface</span>::<span class="variable language_">class</span>,</span><br><span class="line">            <span class="comment">// 对应容器对象 ID，可选，默认值等于 service 配置的值，用来定义依赖注入的 key</span></span><br><span class="line">            <span class="string">&#x27;id&#x27;</span> =&gt; <span class="title class_">\App\JsonRpc\CalculatorServiceInterface</span>::<span class="variable language_">class</span>,</span><br><span class="line">            <span class="comment">// 服务提供者的服务协议，可选，默认值为 jsonrpc-http</span></span><br><span class="line">            <span class="comment">// 可选 jsonrpc-http jsonrpc jsonrpc-tcp-length-check</span></span><br><span class="line">            <span class="string">&#x27;protocol&#x27;</span> =&gt; <span class="string">&#x27;jsonrpc&#x27;</span>,</span><br><span class="line">            <span class="comment">// 负载均衡算法，可选，默认值为 random</span></span><br><span class="line">            <span class="string">&#x27;load_balancer&#x27;</span> =&gt; <span class="string">&#x27;random&#x27;</span>,</span><br><span class="line">            <span class="comment">// 这个消费者要从哪个服务中心获取节点信息，如不配置则不会从服务中心获取节点信息</span></span><br><span class="line">            <span class="string">&#x27;registry&#x27;</span> =&gt; [</span><br><span class="line">                <span class="string">&#x27;protocol&#x27;</span> =&gt; <span class="string">&#x27;nacos&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;address&#x27;</span> =&gt; <span class="string">&#x27;host.docker.internal:8848&#x27;</span>,</span><br><span class="line">            ],</span><br><span class="line">            <span class="comment">// 如果没有指定上面的 registry 配置，即为直接对指定的节点进行消费，通过下面的 nodes 参数来配置服务提供者的节点信息</span></span><br><span class="line"><span class="comment">//            &#x27;nodes&#x27; =&gt; [</span></span><br><span class="line"><span class="comment">//                [&#x27;host&#x27; =&gt; &#x27;host.docker.internal&#x27;, &#x27;port&#x27; =&gt; 8848],</span></span><br><span class="line"><span class="comment">//            ],</span></span><br><span class="line"><span class="comment">//            // 配置项，会影响到 Packer 和 Transporter</span></span><br><span class="line"><span class="comment">//            &#x27;options&#x27; =&gt; [</span></span><br><span class="line"><span class="comment">//                &#x27;connect_timeout&#x27; =&gt; 5.0,</span></span><br><span class="line"><span class="comment">//                &#x27;recv_timeout&#x27; =&gt; 5.0,</span></span><br><span class="line"><span class="comment">//                &#x27;settings&#x27; =&gt; [</span></span><br><span class="line"><span class="comment">//                    // 根据协议不同，区分配置</span></span><br><span class="line"><span class="comment">//                    &#x27;open_eof_split&#x27; =&gt; true,</span></span><br><span class="line"><span class="comment">//                    &#x27;package_eof&#x27; =&gt; &quot;\r\n&quot;,</span></span><br><span class="line"><span class="comment">//                    // &#x27;open_length_check&#x27; =&gt; true,</span></span><br><span class="line"><span class="comment">//                    // &#x27;package_length_type&#x27; =&gt; &#x27;N&#x27;,</span></span><br><span class="line"><span class="comment">//                    // &#x27;package_length_offset&#x27; =&gt; 0,</span></span><br><span class="line"><span class="comment">//                    // &#x27;package_body_offset&#x27; =&gt; 4,</span></span><br><span class="line"><span class="comment">//                ],</span></span><br><span class="line"><span class="comment">//                // 重试次数，默认值为 2，收包超时不进行重试。暂只支持 JsonRpcPoolTransporter</span></span><br><span class="line"><span class="comment">//                &#x27;retry_count&#x27; =&gt; 2,</span></span><br><span class="line"><span class="comment">//                // 重试间隔，毫秒</span></span><br><span class="line"><span class="comment">//                &#x27;retry_interval&#x27; =&gt; 100,</span></span><br><span class="line"><span class="comment">//                // 使用多路复用 RPC 时的心跳间隔，null 为不触发心跳</span></span><br><span class="line"><span class="comment">//                &#x27;heartbeat&#x27; =&gt; 30,</span></span><br><span class="line"><span class="comment">//                // 当使用 JsonRpcPoolTransporter 时会用到以下配置</span></span><br><span class="line"><span class="comment">//                &#x27;pool&#x27; =&gt; [</span></span><br><span class="line"><span class="comment">//                    &#x27;min_connections&#x27; =&gt; 1,</span></span><br><span class="line"><span class="comment">//                    &#x27;max_connections&#x27; =&gt; 32,</span></span><br><span class="line"><span class="comment">//                    &#x27;connect_timeout&#x27; =&gt; 10.0,</span></span><br><span class="line"><span class="comment">//                    &#x27;wait_timeout&#x27; =&gt; 3.0,</span></span><br><span class="line"><span class="comment">//                    &#x27;heartbeat&#x27; =&gt; -1,</span></span><br><span class="line"><span class="comment">//                    &#x27;max_idle_time&#x27; =&gt; 60.0,</span></span><br><span class="line"><span class="comment">//                ],</span></span><br><span class="line"><span class="comment">//            ],</span></span><br><span class="line">        ]</span><br><span class="line">    ],</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 还需要添加驱动</span></span><br><span class="line">    <span class="string">&#x27;drivers&#x27;</span> =&gt; [</span><br><span class="line"><span class="comment">//        &#x27;consul&#x27; =&gt; [</span></span><br><span class="line"><span class="comment">//            &#x27;uri&#x27; =&gt; &#x27;http://127.0.0.1:8500&#x27;,</span></span><br><span class="line"><span class="comment">//            &#x27;token&#x27; =&gt; &#x27;&#x27;,</span></span><br><span class="line"><span class="comment">//        ],</span></span><br><span class="line">        <span class="string">&#x27;nacos&#x27;</span> =&gt; [</span><br><span class="line">            <span class="comment">// nacos server url like https://nacos.hyperf.io, Priority is higher than host:port</span></span><br><span class="line">            <span class="comment">// &#x27;url&#x27; =&gt; &#x27;&#x27;,</span></span><br><span class="line">            <span class="comment">// The nacos host info</span></span><br><span class="line">            <span class="string">&#x27;host&#x27;</span> =&gt; <span class="string">&#x27;host.docker.internal&#x27;</span> ,</span><br><span class="line">            <span class="string">&#x27;port&#x27;</span> =&gt; <span class="number">8848</span>,</span><br><span class="line">            <span class="comment">// The nacos account info</span></span><br><span class="line">            <span class="string">&#x27;username&#x27;</span> =&gt; <span class="literal">null</span>,</span><br><span class="line">            <span class="string">&#x27;password&#x27;</span> =&gt; <span class="literal">null</span>,</span><br><span class="line"><span class="comment">//            &#x27;guzzle&#x27; =&gt; [</span></span><br><span class="line"><span class="comment">//                &#x27;config&#x27; =&gt; null,</span></span><br><span class="line"><span class="comment">//            ],</span></span><br><span class="line"><span class="comment">//            &#x27;group_name&#x27; =&gt; &#x27;api&#x27;,</span></span><br><span class="line"><span class="comment">//            &#x27;namespace_id&#x27; =&gt; &#x27;namespace_id&#x27;,</span></span><br><span class="line">            <span class="string">&#x27;heartbeat&#x27;</span> =&gt; <span class="number">5</span>,</span><br><span class="line">        ],</span><br><span class="line">    ],</span><br><span class="line">];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<p>写接口 app&#x2F;JsonRpc&#x2F;CalculatorServiceInterface.php</p>
+<figure class="highlight php"><figcaption><span>app/JsonRpc/CalculatorServiceInterface.php</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">JsonRpc</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">CalculatorServiceInterface</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params"><span class="keyword">int</span> <span class="variable">$a</span>, <span class="keyword">int</span> <span class="variable">$b</span></span>)</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<p>调用方法：</p>
+<figure class="highlight php"><figcaption><span>app/Controller/IndexController.php</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span>(strict_types=<span class="number">1</span>);</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This file is part of Hyperf.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@link</span>     https://www.hyperf.io</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@document</span> https://hyperf.wiki</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@contact</span>  group<span class="doctag">@hyperf</span>.io</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@license</span>  https://github.com/hyperf/hyperf/blob/master/LICENSE</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">Controller</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">JsonRpc</span>\<span class="title">CalculatorServiceInterface</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">Di</span>\<span class="title">Annotation</span>\<span class="title">Inject</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">IndexController</span> <span class="keyword">extends</span> <span class="title">AbstractController</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">#[Inject</span><span class="meta">]</span></span><br><span class="line">    <span class="keyword">private</span> CalculatorServiceInterface <span class="variable">$CalculatorService</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$a</span> = <span class="variable language_">$this</span>-&gt;CalculatorService-&gt;<span class="title function_ invoke__">add</span>(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line">        <span class="title function_ invoke__">var_dump</span>(<span class="variable">$a</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;200&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>访问 url</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/e620e064672ab38b02da98df4d38faae.png" alt="截图"></p>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h2 id="Redis队列"><a href="#Redis队列" class="headerlink" title="Redis队列"></a>Redis队列</h2><p>异步队列区别于 <code>RabbitMQ</code> <code>Kafka</code> 等消息队列，它只提供一种 <code>异步处理</code> 和 <code>异步延时处理</code> 的能力，并 <strong>不能</strong> 严格地保证消息的持久化和 <strong>不支持</strong> 完备的 ACK 应答机制。</p>
+<h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><div class="tag-plugin copy"><input class="copy-area" id="copy_31" value="composer require hyperf/async-queue"><button class="copy-btn" onclick="util.copy(&quot;copy_31&quot;,&quot;复制成功&quot;)"><svg class="icon copy-btn" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"></path></svg></button></div>
+
+
+
+<br/>
+
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>配置文件位于 config&#x2F;autoload&#x2F;async_queue.php，如该文件不存在，可通过 <code>php bin/hyperf.php vendor:publish hyperf/async-queue</code> 命令来将发布对应的配置文件，也可自行创建。</p>
+<figure class="highlight php"><figcaption><span>config/autoload/async_queue.php</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> [</span><br><span class="line">    <span class="string">&#x27;default&#x27;</span> =&gt; [</span><br><span class="line">        <span class="string">&#x27;driver&#x27;</span> =&gt; <span class="title class_">Hyperf\AsyncQueue\Driver\RedisDriver</span>::<span class="variable language_">class</span>,</span><br><span class="line">        <span class="string">&#x27;redis&#x27;</span> =&gt; [</span><br><span class="line">            <span class="string">&#x27;pool&#x27;</span> =&gt; <span class="string">&#x27;default&#x27;</span></span><br><span class="line">        ],</span><br><span class="line">        <span class="string">&#x27;channel&#x27;</span> =&gt; <span class="string">&#x27;queue&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;timeout&#x27;</span> =&gt; <span class="number">2</span>,</span><br><span class="line">        <span class="string">&#x27;retry_seconds&#x27;</span> =&gt; <span class="number">5</span>,</span><br><span class="line">        <span class="string">&#x27;handle_timeout&#x27;</span> =&gt; <span class="number">10</span>,</span><br><span class="line">        <span class="string">&#x27;processes&#x27;</span> =&gt; <span class="number">1</span>,</span><br><span class="line">        <span class="string">&#x27;concurrent&#x27;</span> =&gt; [</span><br><span class="line">            <span class="string">&#x27;limit&#x27;</span> =&gt; <span class="number">10</span>,</span><br><span class="line">        ],</span><br><span class="line">        <span class="string">&#x27;max_messages&#x27;</span> =&gt; <span class="number">0</span>,</span><br><span class="line">    ],</span><br><span class="line">];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h3 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h3><h4 id="配置异步消费进程"><a href="#配置异步消费进程" class="headerlink" title="配置异步消费进程"></a>配置异步消费进程</h4><p>组件已经提供了默认 异步消费进程，只需要将它配置到 config&#x2F;autoload&#x2F;processes.php 中即可。</p>
+<figure class="highlight php"><figcaption><span>config/autoload/processes.php</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> [</span><br><span class="line">    <span class="title class_">Hyperf\AsyncQueue\Process\ConsumerProcess</span>::<span class="variable language_">class</span>,</span><br><span class="line">];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><p><code>ConsumerProcess</code> 是异步消费进程，会根据用户创建的 <code>Job</code> 或者使用 <code>#[AsyncQueueMessage]</code> 的代码块，执行消费逻辑。 <code>Job</code> 和 <code>#[AsyncQueueMessage]</code> 都是需要投递和执行的任务，即数据、消费逻辑都会在任务中定义。</p>
+<ul>
+<li><code>Job</code> 类中成员变量即为待消费的数据，<code>handle()</code> 方法则为消费逻辑。</li>
+<li><code>#[AsyncQueueMessage]</code> 注解的方法，构造函数传入的数据即为待消费的数据，方法体则为消费逻辑。</li>
+</ul>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/309d141127380bb4bacbb7364d781a5d.png" alt="截图"></p>
+<br/>
+
+<h3 id="任务执行流转流程"><a href="#任务执行流转流程" class="headerlink" title="任务执行流转流程"></a>任务执行流转流程</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/c2b05ada664afb089a1265d68d092999.png" alt="截图"></p>
+<br/>
+
+
+
+<p>如果redis队列消息没有被消费删除，那可能是进入了失败&#x2F;超时队列</p>
+<br/>
+
+<br/>
+
+<br/>
+
+<h3 id="代码实例"><a href="#代码实例" class="headerlink" title="代码实例"></a>代码实例</h3><h4 id="传统方式"><a href="#传统方式" class="headerlink" title="传统方式"></a>传统方式</h4><p>这种模式会把对象直接序列化然后存到 Redis 等队列中，所以为了保证序列化后的体积，尽量不要将 <code>Container</code>，<code>Config</code> 等设置为成员变量。</p>
+<blockquote>
+<p>因为 Job 会被序列化，所以成员变量不要包含 匿名函数 等 无法被序列化 的内容，如果不清楚哪些内容无法被序列化，尽量使用注解方式。</p>
+</blockquote>
+<figure class="highlight php"><figcaption><span>app/Job/ExampleJob.php</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span>(strict_types=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">Job</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">AsyncQueue</span>\<span class="title">Job</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ExampleJob</span> <span class="keyword">extends</span> <span class="title">Job</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="variable">$params</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 任务执行失败后的重试次数，即最大执行次数为 $maxAttempts+1 次</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">int</span> <span class="variable">$maxAttempts</span> = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params"><span class="variable">$params</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 这里最好是普通数据，不要使用携带 IO 的对象，比如 PDO 对象</span></span><br><span class="line">        <span class="variable language_">$this</span>-&gt;params = <span class="variable">$params</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 根据参数处理具体逻辑</span></span><br><span class="line">        <span class="comment">// 通过具体参数获取模型等</span></span><br><span class="line">        <span class="comment">// 这里的逻辑会在 ConsumerProcess 进程中执行</span></span><br><span class="line">        <span class="title function_ invoke__">var_dump</span>(<span class="variable">$this</span>-&gt;params);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<p>正确定义完 <code>Job</code> 后，我们需要写一个专门投递消息的 <code>Service</code>，代码如下。</p>
+<figure class="highlight php"><figcaption><span>app/Service/QueueService.php</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span>(strict_types=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">Service</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Job</span>\<span class="title">ExampleJob</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">AsyncQueue</span>\<span class="title">Driver</span>\<span class="title">DriverFactory</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">AsyncQueue</span>\<span class="title">Driver</span>\<span class="title">DriverInterface</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QueueService</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> DriverInterface <span class="variable">$driver</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span>(<span class="params">DriverFactory <span class="variable">$driverFactory</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;driver = <span class="variable">$driverFactory</span>-&gt;<span class="title function_ invoke__">get</span>(<span class="string">&#x27;default&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 生产消息.</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> $params 数据</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> int $delay 延时时间 单位秒</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">push</span>(<span class="params"><span class="variable">$params</span>, <span class="keyword">int</span> <span class="variable">$delay</span> = <span class="number">0</span></span>): <span class="title">bool</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 这里的 `ExampleJob` 会被序列化存到 Redis 中，所以内部变量最好只传入普通数据</span></span><br><span class="line">        <span class="comment">// 同理，如果内部使用了注解 @Value 会把对应对象一起序列化，导致消息体变大。</span></span><br><span class="line">        <span class="comment">// 所以这里也不推荐使用 `make` 方法来创建 `Job` 对象。</span></span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">$this</span>-&gt;driver-&gt;<span class="title function_ invoke__">push</span>(<span class="keyword">new</span> <span class="title class_">ExampleJob</span>(<span class="variable">$params</span>), <span class="variable">$delay</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p>投递消息</p>
+<p>接下来，调用我们的 <code>QueueService</code> 投递消息即可。</p>
+<figure class="highlight php"><figcaption><span>app/Controller/QueueController.php</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span>(strict_types=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">Controller</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Service</span>\<span class="title">QueueService</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">Di</span>\<span class="title">Annotation</span>\<span class="title">Inject</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">HttpServer</span>\<span class="title">Annotation</span>\<span class="title">AutoController</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[AutoController</span><span class="meta">]</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QueueController</span> <span class="keyword">extends</span> <span class="title">AbstractController</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="meta">#[Inject</span><span class="meta">]</span></span><br><span class="line">    <span class="keyword">protected</span> QueueService <span class="variable">$service</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 传统模式投递消息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;service-&gt;<span class="title function_ invoke__">push</span>([</span><br><span class="line">            <span class="string">&#x27;group@hyperf.io&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;https://doc.hyperf.io&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;https://www.hyperf.io&#x27;</span>,</span><br><span class="line">        ]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;success&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h4 id="注释方式"><a href="#注释方式" class="headerlink" title="注释方式"></a>注释方式</h4><p>框架除了传统方式投递消息，还提供了注解方式。</p>
+<blockquote>
+<p>注解方式会在非消费环境下自动投递消息到队列，故，如果我们在队列中使用注解方式时，则不会再次投递到队列当中，而是直接在本消费进程中执行。 如果仍然需要在队列中投递消息，则可以在队列中使用传统模式投递。</p>
+</blockquote>
+<p>让我们重写上述 QueueService，直接将 ExampleJob 的逻辑搬到 example 方法中，并加上对应注解 <code>#[AsyncQueueMessage]</code>，具体代码如下。</p>
+<figure class="highlight php"><figcaption><span>app/Service/QueueService.php</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span>(strict_types=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">Service</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">AsyncQueue</span>\<span class="title">Annotation</span>\<span class="title">AsyncQueueMessage</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QueueService</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="meta">#[AsyncQueueMessage</span><span class="meta">]</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">example</span>(<span class="params"><span class="variable">$params</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 需要异步执行的代码逻辑</span></span><br><span class="line">        <span class="comment">// 这里的逻辑会在 ConsumerProcess 进程中执行</span></span><br><span class="line">        <span class="title function_ invoke__">var_dump</span>(<span class="variable">$params</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<p>投递消息</p>
+<p>注解模式投递消息就跟平常调用方法一致，代码如下。</p>
+<figure class="highlight php"><figcaption><span>app/Controller/QueueController.php</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span>(strict_types=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">Controller</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Service</span>\<span class="title">QueueService</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">Di</span>\<span class="title">Annotation</span>\<span class="title">Inject</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">HttpServer</span>\<span class="title">Annotation</span>\<span class="title">AutoController</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[AutoController</span><span class="meta">]</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QueueController</span> <span class="keyword">extends</span> <span class="title">AbstractController</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="meta">#[Inject</span><span class="meta">]</span></span><br><span class="line">    <span class="keyword">protected</span> QueueService <span class="variable">$service</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 注解模式投递消息</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">example</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;service-&gt;<span class="title function_ invoke__">example</span>([</span><br><span class="line">            <span class="string">&#x27;group@hyperf.io&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;https://doc.hyperf.io&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;https://www.hyperf.io&#x27;</span>,</span><br><span class="line">        ]);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;success&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h2 id="模型全文检索"><a href="#模型全文检索" class="headerlink" title="模型全文检索"></a>模型全文检索</h2><h3 id="安装-2"><a href="#安装-2" class="headerlink" title="安装"></a><a target="_blank" rel="noopener" href="https://hyperf.wiki/3.1/#/zh-cn/scout?id=%e5%ae%89%e8%a3%85">安装</a></h3><h4 id="引入组件包和-Elasticsearch-驱动"><a href="#引入组件包和-Elasticsearch-驱动" class="headerlink" title="引入组件包和 Elasticsearch 驱动"></a><a target="_blank" rel="noopener" href="https://hyperf.wiki/3.1/#/zh-cn/scout?id=%e5%bc%95%e5%85%a5%e7%bb%84%e4%bb%b6%e5%8c%85%e5%92%8c-elasticsearch-%e9%a9%b1%e5%8a%a8">引入组件包和 Elasticsearch 驱动</a></h4><div class="tag-plugin copy"><input class="copy-area" id="copy_32" value="composer require hyperf/scout"><button class="copy-btn" onclick="util.copy(&quot;copy_32&quot;,&quot;复制成功&quot;)"><svg class="icon copy-btn" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"></path></svg></button></div>
+
+<div class="tag-plugin copy"><input class="copy-area" id="copy_33" value="composer require hyperf/elasticsearch"><button class="copy-btn" onclick="util.copy(&quot;copy_33&quot;,&quot;复制成功&quot;)"><svg class="icon copy-btn" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"></path></svg></button></div>
+
+<br/>
+
+<h3 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h3><h4 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h4><p>生成配置文件</p>
+<div class="tag-plugin copy"><input class="copy-area" id="copy_34" value="php bin/hyperf.php vendor:publish hyperf/scout"><button class="copy-btn" onclick="util.copy(&quot;copy_34&quot;,&quot;复制成功&quot;)"><svg class="icon copy-btn" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"></path></svg></button></div>
+
+<p>这个命令将在你的 config 目录下生成一个 scout.php 配置文件。</p>
+<p>配置文件:</p>
+<figure class="highlight php"><figcaption><span>config/autoload/scout.php</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span>(strict_types=<span class="number">1</span>);</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This file is part of Hyperf.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@link</span>     https://www.hyperf.io</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@document</span> https://hyperf.wiki</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@contact</span>  group<span class="doctag">@hyperf</span>.io</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@license</span>  https://github.com/hyperf/hyperf/blob/master/LICENSE</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">Scout</span>\<span class="title">Provider</span>\<span class="title">ElasticsearchProvider</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="keyword">function</span> <span class="title">Hyperf</span>\<span class="title">Support</span>\<span class="title">env</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> [</span><br><span class="line">    <span class="string">&#x27;default&#x27;</span> =&gt; <span class="title function_ invoke__">env</span>(<span class="string">&#x27;SCOUT_ENGINE&#x27;</span>, <span class="string">&#x27;elasticsearch&#x27;</span>),</span><br><span class="line">    <span class="string">&#x27;chunk&#x27;</span> =&gt; [</span><br><span class="line">        <span class="string">&#x27;searchable&#x27;</span> =&gt; <span class="number">500</span>,</span><br><span class="line">        <span class="string">&#x27;unsearchable&#x27;</span> =&gt; <span class="number">500</span>,</span><br><span class="line">    ],</span><br><span class="line">    <span class="string">&#x27;prefix&#x27;</span> =&gt; <span class="title function_ invoke__">env</span>(<span class="string">&#x27;SCOUT_PREFIX&#x27;</span>, <span class="string">&#x27;&#x27;</span>),</span><br><span class="line">    <span class="string">&#x27;soft_delete&#x27;</span> =&gt; <span class="literal">false</span>,</span><br><span class="line">    <span class="string">&#x27;concurrency&#x27;</span> =&gt; <span class="number">100</span>,</span><br><span class="line">    <span class="string">&#x27;engine&#x27;</span> =&gt; [</span><br><span class="line">        <span class="string">&#x27;elasticsearch&#x27;</span> =&gt; [</span><br><span class="line">            <span class="string">&#x27;driver&#x27;</span> =&gt; <span class="title class_">ElasticsearchProvider</span>::<span class="variable language_">class</span>,</span><br><span class="line">            <span class="string">&#x27;index&#x27;</span> =&gt; <span class="literal">null</span>,</span><br><span class="line">            <span class="string">&#x27;hosts&#x27;</span> =&gt; [</span><br><span class="line">                <span class="title function_ invoke__">env</span>(<span class="string">&#x27;ELASTICSEARCH_HOST&#x27;</span>, <span class="string">&#x27;https://elastic:elastic@host.docker.internal:9200&#x27;</span>),</span><br><span class="line">            ],</span><br><span class="line">        ],</span><br><span class="line">    ],</span><br><span class="line">];</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<h3 id="ES同步"><a href="#ES同步" class="headerlink" title="ES同步"></a>ES同步</h3><p>先创建模型，然后在模型里添加 <code>use Searchable;</code> ，这个 trait 会注册一个模型观察者来保持模型和所有驱动的同步：</p>
+<figure class="highlight php"><figcaption><span>app/Model/Test01.php</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">declare</span>(strict_types=<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">Model</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">DbConnection</span>\<span class="title">Model</span>\<span class="title">Model</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">Scout</span>\<span class="title">Searchable</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@property</span> int $id id</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@property</span> string $conn 填充内容</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@property</span> \Carbon\Carbon $created_at </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@property</span> \Carbon\Carbon $updated_at </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test01</span> <span class="keyword">extends</span> <span class="title">Model</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">// 自动检测并数据同步到es：</span></span><br><span class="line">    <span class="keyword">use</span> <span class="title">Searchable</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The table associated with the model.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> ?<span class="keyword">string</span> <span class="variable">$table</span> = <span class="string">&#x27;test01&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The attributes that are mass assignable.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">array</span> <span class="variable">$fillable</span> = [];</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * The attributes that should be cast to native types.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">array</span> <span class="variable">$casts</span> = [<span class="string">&#x27;id&#x27;</span> =&gt; <span class="string">&#x27;integer&#x27;</span>, <span class="string">&#x27;created_at&#x27;</span> =&gt; <span class="string">&#x27;datetime&#x27;</span>, <span class="string">&#x27;updated_at&#x27;</span> =&gt; <span class="string">&#x27;datetime&#x27;</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<p>如果你想要将 Scout 安装到现有的项目中，你可能已经有了想要导入搜索驱动的数据库记录。使用 Scout 提供的命令 <code>import</code> 把所有现有记录导入到搜索索引里：</p>
+<div class="tag-plugin copy"><input class="copy-area" id="copy_35" value="php bin/hyperf.php scout:import AppModelTest01"><button class="copy-btn" onclick="util.copy(&quot;copy_35&quot;,&quot;复制成功&quot;)"><svg class="icon copy-btn" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"></path></svg></button></div>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/5581b58cd3ba47772900af630ea8c544.png" alt="截图"></p>
+<br/>
+
+<br/>
+
+<h4 id="同步测试"><a href="#同步测试" class="headerlink" title="同步测试"></a>同步测试</h4><p>写一个服务类</p>
+<figure class="highlight php"><figcaption><span>app/Service/NewService.php</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">Service</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Model</span>\<span class="title">Test01</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NewService</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">// 数据写入</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">addNews</span>(<span class="params"><span class="variable">$conn</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$db</span> = <span class="keyword">new</span> <span class="title class_">Test01</span>();</span><br><span class="line">        <span class="variable">$db</span>-&gt;conn = <span class="variable">$conn</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$db</span>-&gt;<span class="title function_ invoke__">save</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">updateTest</span>(<span class="params"><span class="variable">$id</span>,<span class="variable">$conn</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$db</span> = <span class="title class_">Test01</span>::<span class="title function_ invoke__">find</span>(<span class="variable">$id</span>);</span><br><span class="line">        <span class="variable">$db</span>-&gt;conn = <span class="variable">$conn</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$db</span>-&gt;<span class="title function_ invoke__">save</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span>  <span class="function"><span class="keyword">function</span> <span class="title">seachTest</span>(<span class="params"><span class="variable">$conn</span></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$db</span> = <span class="title class_">Test01</span>::<span class="title function_ invoke__">search</span>(<span class="variable">$conn</span>)-&gt;<span class="title function_ invoke__">get</span>()-&gt;<span class="title function_ invoke__">all</span>();</span><br><span class="line">        <span class="keyword">return</span> <span class="variable">$db</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<p>写一个添加sql信息的控制器</p>
+<figure class="highlight php"><figcaption><span>app/Controller/NewController.php</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title class_">App</span>\<span class="title class_">Controller</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">App</span>\<span class="title">Service</span>\<span class="title">NewService</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">Di</span>\<span class="title">Annotation</span>\<span class="title">Inject</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">HttpServer</span>\<span class="title">Annotation</span>\<span class="title">Controller</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Hyperf</span>\<span class="title">HttpServer</span>\<span class="title">Annotation</span>\<span class="title">RequestMapping</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#[Controller</span><span class="meta">]</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">NewControoler</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="meta">#[Inject</span><span class="meta">]</span></span><br><span class="line">    <span class="keyword">private</span> NewService <span class="variable">$newService</span>;</span><br><span class="line">    <span class="meta">#[RequestMapping</span>(<span class="attr">path</span>: <span class="string">&quot;/estest&quot;</span>,<span class="attr">methods</span>: <span class="string">&quot;POST,GET&quot;</span>)<span class="meta">]</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">estest</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;newService-&gt;<span class="title function_ invoke__">addNews</span>(<span class="string">&quot;estest&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;200&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">#[RequestMapping</span>(<span class="attr">path</span>: <span class="string">&quot;/update&quot;</span>,<span class="attr">methods</span>: <span class="string">&quot;POST,GET&quot;</span>)<span class="meta">]</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">update</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable language_">$this</span>-&gt;newService-&gt;<span class="title function_ invoke__">updateTest</span>(<span class="string">&quot;16&quot;</span>,<span class="string">&quot;updatetest&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;200&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">#[RequestMapping</span>(<span class="attr">path</span>: <span class="string">&quot;/seach&quot;</span>,<span class="attr">methods</span>: <span class="string">&quot;POST,GET&quot;</span>)<span class="meta">]</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">seach</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="variable">$r</span> = <span class="variable language_">$this</span>-&gt;newService-&gt;<span class="title function_ invoke__">seachTest</span>(<span class="string">&quot;estest&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> [<span class="string">&#x27;200&#x27;</span>,<span class="variable">$r</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<p>去es里查询</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/de8f74b9c4a7bf7d24a1509f6ae4bc2b.png" alt="截图"></p>
+<br/>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h2 id="Elasticsearch-使用"><a href="#Elasticsearch-使用" class="headerlink" title="Elasticsearch 使用 *"></a>Elasticsearch 使用 *</h2><p>ES是一个开源的高扩展的分布式全文检索引擎，它可以近乎实时的存储、检索数据。通过对索引的分片来进行快速查询，可以通过多台服务进行备份</p>
+<p>资料学习：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Qz411e7yx?spm_id_from=333.788.videopod.episodes&vd_source=25f1414c270c619f0808f44bf577e1d5">Elasticsearch教学视频_哔哩哔哩_bilibili</a></p>
+<h3 id="ES的结构"><a href="#ES的结构" class="headerlink" title="ES的结构"></a>ES的结构</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/227383b52f0d93bdb018502564b65f04.png" alt="截图"></p>
+<br/>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/fd44c1eb1c33a67d35ddd1f322bfc832.png" alt="截图"></p>
+<br/>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/60d1f5f915a653a869c97e452ed41bba.png" alt="截图"></p>
+<br/>
+
+<br/>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/f1c0c220227a0a033d0d5f29269cb59d.png" alt="截图"></p>
+<br/>
+
+<p><code>/索引/类型/文档/属性/</code></p>
+<br/>
+
+<p>Elasticsearch：index –&gt; type –&gt; doc –&gt; field<br>MySQL: 数据库 –&gt; 数据表 –&gt; 行 –&gt; 列</p>
+<p>在 7.X 版本中，直接去除了 type 的概念，就是说 index 不再会有 type。</p>
+<br/>
+
+<h3 id="RESTful语法"><a href="#RESTful语法" class="headerlink" title="RESTful语法"></a>RESTful语法</h3><p>Elasticsearch的大多数操作，主要是通过API进行搜索和其他操作。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## GET 请求</span></span><br><span class="line">http://ip:port/index   <span class="comment">## 查询索引信息</span></span><br><span class="line">http://ip:port/index/type/doc_id   <span class="comment">## 查询指定文档信息</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## POST 请求</span></span><br><span class="line">http://ip:port/index/type/_search   <span class="comment">## 查询文档，可以在请求体中添加json字符串代表查询条件</span></span><br><span class="line">http://ip:port/index/type/doc_id/_update   <span class="comment">## 修改文档，可以在请求体中添加json字符串代表修改的具体信息</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## PUT请求</span></span><br><span class="line">http://ip:port/index   <span class="comment">## 创建一个索引，需要在请求体中指定索引的信息</span></span><br><span class="line">http://ip:port/index/type/_mappings   <span class="comment">## 代表创建索引时，指定索引文档存储的属性信息</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## DELETE请求</span></span><br><span class="line">http://ip:port/index   <span class="comment">## 删除跑路</span></span><br><span class="line">http://ip:port/index/type/doc_id   <span class="comment">## 删除指定的文档</span></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<h4 id="索引的操作"><a href="#索引的操作" class="headerlink" title="索引的操作"></a>索引的操作</h4><h4 id="创建一个索引"><a href="#创建一个索引" class="headerlink" title="创建一个索引"></a>创建一个索引</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 创建索引</span></span><br><span class="line"><span class="comment">## &quot;number_of_shards&quot;: 5,      ## 分片数</span></span><br><span class="line"><span class="comment">## &quot;number_of_replicas&quot;: 1     ## 备份数</span></span><br><span class="line">PUT /person</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;settings&quot;</span>: </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;number_of_shards&quot;</span>: 5,       </span><br><span class="line">        <span class="string">&quot;number_of_replicas&quot;</span>: 1      </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/f5288e958f4ae44e98aad46ee4cf921f.png" alt="截图"></p>
+<br/>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/6f1ed1b07e17014a3b97684a04c7b681.png" alt="截图"></p>
+<br/>
+
+<br/>
+
+<h4 id="查看索引信息"><a href="#查看索引信息" class="headerlink" title="查看索引信息"></a>查看索引信息</h4><p>查看刚刚创建的索引的状态</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/b0052cb1e738ca82cec237afc960ab17.png" alt="截图"></p>
+<br/>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/088c0be3d16d5f6ea06841618d40b5a1.png" alt="截图"></p>
+<br/>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 查看索引信息</span></span><br><span class="line">GET /person</span><br></pre></td></tr></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/2cfd24368c9d922375ac61b7146bd3bd.png" alt="截图"></p>
+<br/>
+
+<br/>
+
+<br/>
+
+<h4 id="删除索引"><a href="#删除索引" class="headerlink" title="删除索引"></a>删除索引</h4><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/23cab07aa2cbe1ac1062df02f062c660.png" alt="截图"></p>
+<br/>
+
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 删除索引</span></span><br><span class="line">DELETE /person</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h3 id="创建索引并指定数据结构"><a href="#创建索引并指定数据结构" class="headerlink" title="创建索引并指定数据结构"></a>创建索引并指定数据结构</h3><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/6ff63c6dffabd5f5cd34ced03571aefc.png" alt="截图"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/a9c878a0c71c89332c3024b810c9cb32.png" alt="截图"></p>
+<br/>
+
+<p>在 6.0 的时候，已经默认只能支持一个索引一个 type 了，7.0 版本新增了一个参数 include_type_name ，即让所有的 API 是 type 相关的，这个参数在 7.0 默认是 true，不过在 8.0 的时候，会默认改成 false，也就是不包含 type 信息了，这个是 type 用于移除的一个开关。</p>
+<ul>
+<li>索引操作：<code>PUT &#123;index&#125;/&#123;type&#125;/&#123;id&#125;</code> 需要修改成 <code>PUT &#123;index&#125;/_doc/&#123;id&#125;</code></li>
+<li>Mapping 操作：PUT {index}&#x2F;{type}&#x2F;_mapping 则变成 PUT {index}&#x2F;_mapping</li>
+<li>所有增删改查搜索操作返回结果里面的关键字 _type 都将被移除</li>
+</ul>
+<br/>
+
+<h4 id="ES-6-0-以下语法"><a href="#ES-6-0-以下语法" class="headerlink" title="ES 6.0 以下语法"></a>ES 6.0 以下语法</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## ES 6.0 及以下版本语法（有一个或多个Type类型）</span></span><br><span class="line"><span class="comment">## settings 指定分片和备份数</span></span><br><span class="line"><span class="comment">## mappings 指定数据结构：user类型，文档属性名：id、conn属性</span></span><br><span class="line">PUT /users</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;settings&quot;</span>: </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;number_of_shards&quot;</span>: 5,       </span><br><span class="line">        <span class="string">&quot;number_of_replicas&quot;</span>: 1      </span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">## 指定数据结构</span></span><br><span class="line">    <span class="string">&quot;mappings&quot;</span>: &#123;</span><br><span class="line">      <span class="comment">## 类型Type</span></span><br><span class="line">      <span class="string">&quot;user&quot;</span>:&#123;</span><br><span class="line">        <span class="comment">## 文档存储的Field</span></span><br><span class="line">        <span class="string">&quot;properties&quot;</span>:&#123;</span><br><span class="line">          <span class="comment">## Field属性名</span></span><br><span class="line">          <span class="string">&quot;name&quot;</span>:&#123;</span><br><span class="line">            <span class="comment">## 类型</span></span><br><span class="line">            <span class="string">&quot;type&quot;</span>:<span class="string">&quot;text&quot;</span>,</span><br><span class="line">            <span class="comment">## 指定当前Field可以作为查询的条件</span></span><br><span class="line">            <span class="string">&quot;index&quot;</span>:<span class="literal">true</span>,</span><br><span class="line">            <span class="comment">## 是否额外存储</span></span><br><span class="line">            <span class="string">&quot;store&quot;</span>:<span class="literal">false</span></span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="string">&quot;conn&quot;</span>:&#123;</span><br><span class="line">            <span class="string">&quot;type&quot;</span>:<span class="string">&quot;text&quot;</span></span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="string">&quot;date&quot;</span>:&#123;</span><br><span class="line">            <span class="string">&quot;type&quot;</span>:<span class="string">&quot;date&quot;</span>,</span><br><span class="line">            <span class="comment">## 时间类型的格式化方式, 日期类型必须要加*</span></span><br><span class="line">            <span class="string">&quot;format&quot;</span>:<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="ES-7-0-以上语法"><a href="#ES-7-0-以上语法" class="headerlink" title="ES 7.0 以上语法"></a>ES 7.0 以上语法</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## ES 7.0 及以上版本语法（没有Type类型）</span></span><br><span class="line">PUT /user</span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;settings&quot;</span>: </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="string">&quot;number_of_shards&quot;</span>: 5,       </span><br><span class="line">        <span class="string">&quot;number_of_replicas&quot;</span>: 1      </span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">&quot;mappings&quot;</span>: &#123;</span><br><span class="line">      <span class="string">&quot;properties&quot;</span>:&#123;</span><br><span class="line">        <span class="string">&quot;name&quot;</span>:&#123;</span><br><span class="line">          <span class="string">&quot;type&quot;</span>:<span class="string">&quot;text&quot;</span>,</span><br><span class="line">          <span class="string">&quot;index&quot;</span>:<span class="literal">true</span>,</span><br><span class="line">          <span class="string">&quot;store&quot;</span>:<span class="literal">false</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">&quot;conn&quot;</span>:&#123;</span><br><span class="line">          <span class="string">&quot;type&quot;</span>:<span class="string">&quot;text&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="string">&quot;date&quot;</span>:&#123;</span><br><span class="line">          <span class="string">&quot;type&quot;</span>:<span class="string">&quot;date&quot;</span>,</span><br><span class="line">          <span class="string">&quot;format&quot;</span>:<span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">     </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h3 id="操作文档"><a href="#操作文档" class="headerlink" title="操作文档"></a>操作文档</h3><p>Elasticsearch 8.12.2</p>
+<table>
+<thead>
+<tr>
+<th align="center">method</th>
+<th align="center">url地址</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">PUT</td>
+<td align="center">ip:9200 &#x2F; 索引名称 &#x2F; 默认文档类型 &#x2F; 文档id</td>
+<td align="center">创建文档（指定文档id )</td>
+</tr>
+<tr>
+<td align="center">POST</td>
+<td align="center">ip:9200 &#x2F; 索引名称 &#x2F; 默认文档类型</td>
+<td align="center">创建文档（随机文档id )</td>
+</tr>
+<tr>
+<td align="center">POST</td>
+<td align="center">ip:9200 &#x2F; 索引名称 &#x2F; _update &#x2F; 文档id</td>
+<td align="center">修改文档</td>
+</tr>
+<tr>
+<td align="center">DELETE</td>
+<td align="center">ip:9200 &#x2F; 索引名称 &#x2F; 默认文档类型 &#x2F; 文档id</td>
+<td align="center">删除文档</td>
+</tr>
+<tr>
+<td align="center">GET</td>
+<td align="center">ip:9200 &#x2F; 索引名称 &#x2F; 默认文档类型 &#x2F; 文档id</td>
+<td align="center">查询文档通过文档id</td>
+</tr>
+<tr>
+<td align="center">POST</td>
+<td align="center">ip:9200 &#x2F; 索引名称 &#x2F; 默认文档类型 &#x2F;_search</td>
+<td align="center">查询所有数据</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>默认文档类型 &#x3D; _doc</p>
+</blockquote>
+<br/>
+
+<h4 id="添加数据"><a href="#添加数据" class="headerlink" title="添加数据"></a>添加数据</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 添加文档，自动生成id</span></span><br><span class="line"><span class="comment">## POST 和 PUT 都可以添加</span></span><br><span class="line"><span class="comment">## 自动id特点：长度为20个字符，URL安全，base64编码，GUID，分布式生成不冲突</span></span><br><span class="line">POST /user/_doc</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;name&quot;</span>: <span class="string">&quot;name1&quot;</span>,</span><br><span class="line">  <span class="string">&quot;conn&quot;</span>: <span class="string">&quot;我吃牛肉&quot;</span>,</span><br><span class="line">  <span class="string">&quot;date&quot;</span>: <span class="string">&quot;2000-01-01 14:29:20&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 添加文档，手动指定id</span></span><br><span class="line">POST /user/_doc/1</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;name&quot;</span>: <span class="string">&quot;name1&quot;</span>,</span><br><span class="line">  <span class="string">&quot;conn&quot;</span>: <span class="string">&quot;我吃牛肉&quot;</span>,</span><br><span class="line">  <span class="string">&quot;date&quot;</span>: <span class="string">&quot;2000-01-01 14:29:20&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/ab5eada2408543de1ea65d702ee46dfb.png" alt="截图"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/images/Hyperf%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1%E5%89%8D%E7%BD%AE%E5%AD%A6%E4%B9%A0/19f6644317e9b6be73977fe3979db45f.png" alt="截图"></p>
+<br/>
+
+<br/>
+
+<h4 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 对id为的数据进行覆盖操作，整个数据覆盖</span></span><br><span class="line"><span class="comment">## PUT [注意如果PUT不传递值，那么值就会被覆盖]</span></span><br><span class="line">PUT /user/_doc/2</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;conn&quot;</span>: <span class="string">&quot;我不吃牛肉2&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">## POST [灵活性更高]</span></span><br><span class="line">POST /user/_doc/2</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;conn&quot;</span>: <span class="string">&quot;我不吃牛肉2&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">## 路径带_update,需要在参数外套一层 doc，这种方式不影响其他字段</span></span><br><span class="line">POST /user/_update/2</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;doc&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;conn&quot;</span>: <span class="string">&quot;我不吃牛肉&quot;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 获取索引信息</span></span><br><span class="line">GET /user</span><br><span class="line"></span><br><span class="line"><span class="comment">## 查询所有文档数据</span></span><br><span class="line">GET /user/_search</span><br><span class="line"></span><br><span class="line"><span class="comment">## 通过id查询</span></span><br><span class="line">GET /user/_doc/2</span><br><span class="line"></span><br><span class="line"><span class="comment">## 简单的条件查询</span></span><br><span class="line">GET /user/_search?q=name:name1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<h4 id="删除数据"><a href="#删除数据" class="headerlink" title="删除数据"></a>删除数据</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 删除索引</span></span><br><span class="line">DELETE /user</span><br><span class="line"></span><br><span class="line"><span class="comment">## 删除指定文档 </span></span><br><span class="line">DELETE /user/_doc/1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br/>
+
+<br/>
+
+<br/>
+
+<h3 id="php-操作-Elasticsearch"><a href="#php-操作-Elasticsearch" class="headerlink" title="php 操作 Elasticsearch"></a>php 操作 Elasticsearch</h3><h4 id="索引管理"><a href="#索引管理" class="headerlink" title="索引管理"></a>索引管理</h4><p><a target="_blank" rel="noopener" href="https://learnku.com/docs/elasticsearch-php/6.0/index-operations/2007#9877a5">https://learnku.com/docs/elasticsearch-php/6.0/index-operations/2007#9877a5</a></p>
+<br/>
+
+<h4 id="索引文档"><a href="#索引文档" class="headerlink" title="索引文档"></a>索引文档</h4><p><a target="_blank" rel="noopener" href="https://learnku.com/docs/elasticsearch-php/6.0/crud/2008">https://learnku.com/docs/elasticsearch-php/6.0/crud/2008</a></p>
+<br>
+
+</article>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2025/05/29/Hyperf%20%E5%85%B6%E4%BB%96%E7%BB%84%E4%BB%B6/">Hyperf 其他组件</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2025/05/26/Hyperf%20%E5%BF%AB%E9%80%9F%E5%AD%A6%E4%B9%A0/">Hyperf 快速学习</a></div></section></div>
+
+
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="text"><p>本站由 <a href="/">ShanMoYu</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1">Stellar 1.29.1</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+<widget class="widget-wrapper ghrepo"><div class="widget-body"><div class="items ds-ghinfo" api="https://api.github.com/repos/hyperf/hyperf"><a class="repo" href="https://github.com/hyperf/hyperf" target="_blank" rel="external nofollow noopener noreferrer"><div class="repo-name flex-row"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"></path></svg>hyperf/hyperf</div><div class="repo-desc"><span type="text" id="description">&nbsp;</span></div><div class="grid"><div class="flex-row"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25zm0 2.445L6.615 5.5a.75.75 0 01-.564.41l-3.097.45 2.24 2.184a.75.75 0 01.216.664l-.528 3.084 2.769-1.456a.75.75 0 01.698 0l2.77 1.456-.53-3.084a.75.75 0 01.216-.664l2.24-2.183-3.096-.45a.75.75 0 01-.564-.41L8 2.694v.001z"></path></svg><span type="text" id="stargazers_count"></span></div><div class="flex-row"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M5 3.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm0 2.122a2.25 2.25 0 10-1.5 0v.878A2.25 2.25 0 005.75 8.5h1.5v2.128a2.251 2.251 0 101.5 0V8.5h1.5a2.25 2.25 0 002.25-2.25v-.878a2.25 2.25 0 10-1.5 0v.878a.75.75 0 01-.75.75h-4.5A.75.75 0 015 6.25v-.878zm3.75 7.378a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm3-8.75a.75.75 0 100-1.5.75.75 0 000 1.5z"></path></svg><span type="text" id="forks_count"></span></div><div class="flex-row ds-ghinfo" index="0" api="https://api.github.com/repos/hyperf/hyperf/tags"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="user-select:none;overflow:visible"><path fill-rule="evenodd" d="M2.5 7.775V2.75a.25.25 0 01.25-.25h5.025a.25.25 0 01.177.073l6.25 6.25a.25.25 0 010 .354l-5.025 5.025a.25.25 0 01-.354 0l-6.25-6.25a.25.25 0 01-.073-.177zm-1.5 0V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 010 2.474l-5.026 5.026a1.75 1.75 0 01-2.474 0l-6.25-6.25A1.75 1.75 0 011 7.775zM6 5a1 1 0 100 2 1 1 0 000-2z"></path></svg><span type="text" id="latest-tag-name">0</span></div></div></a></div></div></widget>
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON-RPC-%E6%9C%8D%E5%8A%A1"><span class="toc-text">JSON RPC 服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%9C%8D%E5%8A%A1%E6%8F%90%E4%BE%9B%E8%80%85"><span class="toc-text">定义服务提供者</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89-JSON-RPC-Server"><span class="toc-text">定义 JSON RPC Server</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E5%B8%83%E5%88%B0%E6%9C%8D%E5%8A%A1%E4%B8%AD%E5%BF%83"><span class="toc-text">发布到服务中心</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%B6%88%E8%B4%B9%E7%AB%AF%E9%A1%B9%E7%9B%AE"><span class="toc-text">创建消费端项目</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%88%9B%E5%BB%BA%E4%BB%A3%E7%90%86%E6%B6%88%E8%B4%B9%E8%80%85%E7%B1%BB"><span class="toc-text">自动创建代理消费者类</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Redis%E9%98%9F%E5%88%97"><span class="toc-text">Redis队列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-1"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-text">配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-1"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%BC%82%E6%AD%A5%E6%B6%88%E8%B4%B9%E8%BF%9B%E7%A8%8B"><span class="toc-text">配置异步消费进程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E6%89%A7%E8%A1%8C%E6%B5%81%E8%BD%AC%E6%B5%81%E7%A8%8B"><span class="toc-text">任务执行流转流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E4%BE%8B"><span class="toc-text">代码实例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E6%96%B9%E5%BC%8F"><span class="toc-text">传统方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E9%87%8A%E6%96%B9%E5%BC%8F"><span class="toc-text">注释方式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E5%85%A8%E6%96%87%E6%A3%80%E7%B4%A2"><span class="toc-text">模型全文检索</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-2"><span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%95%E5%85%A5%E7%BB%84%E4%BB%B6%E5%8C%85%E5%92%8C-Elasticsearch-%E9%A9%B1%E5%8A%A8"><span class="toc-text">引入组件包和 Elasticsearch 驱动</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-1"><span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">配置文件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ES%E5%90%8C%E6%AD%A5"><span class="toc-text">ES同步</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E6%B5%8B%E8%AF%95"><span class="toc-text">同步测试</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Elasticsearch-%E4%BD%BF%E7%94%A8"><span class="toc-text">Elasticsearch 使用 *</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ES%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-text">ES的结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RESTful%E8%AF%AD%E6%B3%95"><span class="toc-text">RESTful语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E7%9A%84%E6%93%8D%E4%BD%9C"><span class="toc-text">索引的操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%B4%A2%E5%BC%95"><span class="toc-text">创建一个索引</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%B4%A2%E5%BC%95%E4%BF%A1%E6%81%AF"><span class="toc-text">查看索引信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%B4%A2%E5%BC%95"><span class="toc-text">删除索引</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E7%B4%A2%E5%BC%95%E5%B9%B6%E6%8C%87%E5%AE%9A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="toc-text">创建索引并指定数据结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ES-6-0-%E4%BB%A5%E4%B8%8B%E8%AF%AD%E6%B3%95"><span class="toc-text">ES 6.0 以下语法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ES-7-0-%E4%BB%A5%E4%B8%8A%E8%AF%AD%E6%B3%95"><span class="toc-text">ES 7.0 以上语法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%96%87%E6%A1%A3"><span class="toc-text">操作文档</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="toc-text">添加数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE"><span class="toc-text">更新数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE"><span class="toc-text">查询数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="toc-text">删除数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#php-%E6%93%8D%E4%BD%9C-Elasticsearch"><span class="toc-text">php 操作 Elasticsearch</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E7%AE%A1%E7%90%86"><span class="toc-text">索引管理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B4%A2%E5%BC%95%E6%96%87%E6%A1%A3"><span class="toc-text">索引文档</span></a></li></ol></li></ol></li></ol></div><div class="widget-footer">
+
+<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a></div></widget>
+</div></aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js`,
+    marked: `https://cdn.jsdelivr.net/npm/marked@13.0.1/lib/marked.umd.min.js`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+    
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
+
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+
+<!-- required -->
+<script src="/js/main.js?v=1.29.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    applyThemeToGiscus(theme)
+  }
+
+  const applyThemeToGiscus = (theme) => {
+    theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    }
+  })()
+</script>
+
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/flying-pages@2/flying-pages.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3.1/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>

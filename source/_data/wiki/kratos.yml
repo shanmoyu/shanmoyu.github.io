@@ -1,0 +1,20 @@
+name: Kratos
+
+title: Kratos  - 轻量级 Go 微服务框架
+subtitle: '轻量级 Go 微服务框架 | http://example.com'
+tags: [笔记]
+icon: https://go-kratos.dev/img/logo.svg
+
+cover: https://go-kratos.dev/img/logo.svg
+coverpage: true
+description: Kratos 一套轻量级 Go 微服务框架，包含大量微服务相关框架及工具。
+
+repo: go-kratos/kratos
+search:
+  filter: /wiki/
+  placeholder: 在 Stellar 中搜索...
+leftbar: 
+  - recent
+  
+
+
