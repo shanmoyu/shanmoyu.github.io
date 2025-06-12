@@ -7,6 +7,8 @@ categories: [php,hyperf]
 
 banner: 
 repo: hyperf/hyperf
+
+comments: false  # 设置 false 禁止评论
 ---
 
 

@@ -22,8 +22,8 @@ mathjax:
 topic: # 专栏 id
 author: 
 references:
-comments: # 设置 false 禁止评论
-indexing: # 设置 false 避免被搜索
+comments: false  # 设置 false 禁止评论
+indexing: false  # 设置 false 避免被搜索
 breadcrumb: # 设置 false 隐藏面包屑导航
 leftbar: 
 rightbar:

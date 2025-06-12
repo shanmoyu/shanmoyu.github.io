@@ -1041,7 +1041,32 @@ func (us userRepo) FindByIdAndUsername(ctx context.Context, testRequest *v1.Test
 
 <br>
 
-启动服务访问 `kratos run` :
+运行 `go generate ./...`，生成新的 wire_gen.go 文件：
+
+```golang go generate ./...
+func wireApp(confServer *conf.Server, confData *conf.Data, logger log.Logger) (*kratos.App, func(), error) {
+    db := data.NewDB(confData)
+    client := data.NewDB2(confData)
+    dataData, cleanup, err := data.NewData(confData, logger, db, client)
+    if err != nil {
+        return nil, nil, err
+    }
+    greeterRepo := data.NewGreeterRepo(dataData, logger)
+    greeterUsecase := biz.NewGreeterUsecase(greeterRepo, logger)
+    greeterService := service.NewGreeterService(greeterUsecase)
+    userRepo := data.NewUserRepo(dataData)
+    userUseCase := biz.NewUserUseCase(userRepo)
+    demoService := service.NewDemoService(userUseCase)
+    grpcServer := server.NewGRPCServer(confServer, greeterService, demoService, logger)
+    httpServer := server.NewHTTPServer(confServer, greeterService, demoService, logger)
+    app := newApp(logger, grpcServer, httpServer)
+    return app, func() {
+        cleanup()
+    }, nil
+}
+```
+
+运行 `kratos run`，启动服务访问：
 
 ```golang
 package service

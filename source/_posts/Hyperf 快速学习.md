@@ -7,6 +7,8 @@ categories: [php,hyperf]
 
 banner: https://i0.hdslb.com/bfs/openplatform/bd94766e9017f28374eb60f130be6d423b889111.png
 repo: hyperf/hyperf
+
+comments: false  # 设置 false 禁止评论
 ---
 
 

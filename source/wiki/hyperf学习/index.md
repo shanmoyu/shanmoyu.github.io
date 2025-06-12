@@ -56,12 +56,12 @@ wiki: hyperf # 这是项目名
 
 <!-- tab 提示 -->
 
-`docker stop hyperf` 停止容器
-`docker start hyperf` 启动容器
+docker stop hyperf 停止容器
+docker start hyperf 启动容器
 
-`docker exec -it hyperf /bin/bash` 进入容器
-`cd Test`
-`php bin/hyperf.php start` 启动服务
+docker exec -it hyperf /bin/bash 进入容器
+cd Test
+php bin/hyperf.php start 启动服务
 
 {% endtabs %}
 

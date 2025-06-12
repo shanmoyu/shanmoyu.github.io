@@ -7,6 +7,7 @@ categories: [golang,kratos]
 
 banner: 
 repo: go-kratos/kratos
+comments: false  # 设置 false 禁止评论
 ---
 
 
