@@ -68,8 +68,53 @@
 
 
 
-<footer class="page-footer footnote"><hr><div class="text"><p>本站由 <a href="/">ShanMoYu</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1">Stellar 1.29.1</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
-</div></footer>
+<footer class="page-footer footnote"><hr><center><div class="text"><span>
+© 2024
+</span>
+
+<p>本站由 <a href="/">ShanMoYu</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.1">Stellar 1.29.1</a> 主题创建。<br><span id="runtime_span"></span></p>
+<script type="text/javascript">
+  document.addEventListener('DOMContentLoaded', function() {
+    var runtime_span = document.getElementById('runtime_span');
+
+    function show_runtime(startDate) {
+      // 获取当前时间（北京时间）
+      const now = new Date();
+      
+      // 计算时间差（毫秒）
+      const diff = now - startDate;
+      
+      // 计算年数
+      const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+      
+      // 计算剩余时间（减去整年后的毫秒数）
+      const remainingAfterYears = diff - (years * 1000 * 60 * 60 * 24 * 365);
+      
+      // 计算天数
+      const days = Math.floor(remainingAfterYears / (1000 * 60 * 60 * 24));
+      
+      // 计算剩余时间（减去整天后的毫秒数）
+      const remainingAfterDays = remainingAfterYears - (days * 1000 * 60 * 60 * 24);
+      
+      // 计算小时数
+      const hours = Math.floor(remainingAfterDays / (1000 * 60 * 60));
+      
+      // 计算剩余时间（减去整小时后的毫秒数）
+      const remainingAfterHours = remainingAfterDays - (hours * 1000 * 60 * 60);
+      
+      // 计算分钟数
+      const minutes = Math.floor(remainingAfterHours / (1000 * 60));
+            
+      runtime_span.innerHTML = `营业：${years} 年 ${days} 天 ${hours} 小时 ${minutes} 分钟`;
+    }
+
+    // 使用示例：计算从2023年1月1日北京时间到现在的时间差
+    const startDate = new Date('2025-06-10T00:00:00+08:00'); // 北京时间
+    const duration = show_runtime(startDate);
+    console.log(duration); // 输出示例：营业：1 年 346 天 14 小时 27 分钟
+  });
+</script>
+<span class="totalcount">共发表 9 篇Blog · </span><span class="post-count">总计 28.2k 字</span></div></center></footer>
 <div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
 </aside><div class='float-panel blur'>
   <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
