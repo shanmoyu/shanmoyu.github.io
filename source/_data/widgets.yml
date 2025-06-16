@@ -52,5 +52,21 @@ Github:
   repo: xaoxuu/hexo-theme-stellar
 
 
-
+announcement: 
+  layout: markdown
+  title: 欢迎欢迎
+  linklist: # 与 linklist 组件写法相同
+    columns: 1 
+    items:
+      - icon:
+        title: 
+        url: /
+  content: |
+    
+    本站托管于 GitHub Pages, 加载缓慢请耐心等待，如无法访问或图片加载慢，请尝试代理。
+    
+    🔧 框架: Hexo
+    🎨 主题: Stellar
+    ©️ 图床: GitHub + BiliBili
+    
 

@@ -24,11 +24,6 @@ wiki: kratos # 这是项目名
 
 GORM 的 CRUD 接口操作：https://gorm.io/zh_CN/docs/query.html
 Ent 的 CRUD 接口操作：https://entgo.io/zh/docs/crud
-Go 语言变量：https://zhuanlan.zhihu.com/p/623547784
-
-有 js 和 c 基础可以跳过：
-Go 语言指针：https://www.runoob.com/go/go-pointers.html
-Go 语言结构体：https://www.runoob.com/go/go-structures.html
 
 <br>
 

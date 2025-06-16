@@ -142,6 +142,7 @@ code{
 #read-next{
     margin-top: 20px;
     padding: 0;
+    margin-bottom: 20px;
 }
 section.body{
     display: flex !important;
@@ -224,7 +225,7 @@ div.navbar.top::after{
 
 /* 评论区 */
 #comments{
-    margin-top: 1vh;
+    margin-top: 1.5vh;
 }
 #waline_container{
     width: 100%;

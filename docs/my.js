@@ -58,6 +58,7 @@ window.onload = function(){
     });
 
 
+
     // img引用网络图片资源无法加载问题解决
     var imgs = document.getElementsByTagName("img");
     document.getElementById('start').setAttribute('name', 'referrer');
@@ -66,6 +67,29 @@ window.onload = function(){
         img.setAttribute('referrerpolicy', 'no-referrer');
     });
 
+
+
+    // url #锚点效果
+    const hostUrl = window.location.href.split("#")[0]
+    console.log(hostUrl);
+    function rederString(s){
+        location.replace(hostUrl + "#" + s);
+    }
+    let animationText = "Hello_World!!";
+    let animationIndex = 0;
+    function getAnimationString(){
+        let resultText = animationText.substring(0, animationIndex) + "*" + animationText.substring(animationIndex+1);
+        animationIndex = (animationIndex > animationText.length-2) ? 0 : animationIndex + 1;
+        return resultText;
+    }
+    const updateTimeSecond = 0.2;
+    function update(){
+        rederString(getAnimationString());
+        setTimeout(()=>{
+            requestAnimationFrame(update);
+        },updateTimeSecond*1000)
+    }
+    update();
 
 }
 
